@@ -1,0 +1,43 @@
+version: "3.9"
+services:
+
+  todochecklist:
+    container_name: todochecklist
+    image: mcr.microsoft.com/vscode/devcontainers/typescript-node:latest
+    volumes:
+      - ../workspace:/workspace
+    working_dir: /workspace
+    expose:
+      - '3000'
+    ports: 
+      - '3000:3000'
+    command: bash -c "sudo apt update &&
+      sudo apt install -y default-mysql-client &&
+      sudo apt install -y redis &&
+      npm install -g @nestjs/cli &&
+      while sleep 1000; do :; done"
+    tty: true
+    stdin_open: true
+
+  mysql:
+    container_name: MySql
+    build: ../MySQL/db
+    volumes:
+      - ../MySQL/DB:/docker-entrypoint-initdb.db
+    environment:
+      - MYSQL_ROOT_PASSWORD=toor5963%
+    restart: 'always'
+    expose:
+      - '3306'
+    ports:
+      - "3306:3306"
+
+  redis:
+    container_name: Redis
+    image: "redis:latest"
+    volumes:
+      - "../Redis/data:/data"
+    expose:
+      - '6379'
+    ports:
+      - "6379:6379"

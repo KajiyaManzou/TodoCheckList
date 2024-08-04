@@ -1,0 +1,6 @@
+{
+    "name": "TodoCheckList Server",
+    "dockerComposeFile": "./docker-compose.yml",
+    "service": "todochecklist",
+    "workspaceFolder": "/workspace"
+  }
