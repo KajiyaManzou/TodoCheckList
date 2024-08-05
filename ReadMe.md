@@ -74,5 +74,93 @@ node ➜ /workspace/server $ npm run start
 node ➜ /workspace/server $ 
 ```
 
-- ブラウザで `http://localhost:3000` を開いて Hello World! を表示すればOK.
+- サーバー起動確認: ブラウザで `http://localhost:3000` を開いて Hello World! を表示すればOK.
 ![初期画面](./docs/initialView.png)
+
+- フォルダ構成: 初心者なので、[簡易TODOウェブアプリの開発-Next.js×NestJS(REST・TypeORM)](https://zenn.dev/engineerhikaru/books/0a615c1248a2ea) をそのまま使わせていただきます。dto フォルダは entities に変更、マイグレーション用フォルダ migrations を追加。
+
+```
+./
+├── dist/
+├── migrations/
+├── node_modules/
+├── src/
+│   ├── config/
+│   ├── constants/
+│   ├── controllers/
+│   ├── entities/
+│   ├── models/
+│   ├── modules/
+│   ├── services/
+│   ├── app.controller.spec.ts
+│   ├── app.controller.ts
+│   ├── app.module.ts
+│   ├── app.service.ts
+│   └── main.ts
+├── test/
+│   ├── app.e2e-spec.ts
+│   └── jest-e2e.json
+├── .eslintrc.js
+├── .prettierrc
+├── nest-cli.json
+├── package.json
+├── package-lock.json
+├── README.md
+├── tsconfig.build.json
+└── tsconfig.json
+```
+
+- セットアップ: こちらも、「[簡易TODOウェブアプリの開発-Next.js×NestJS(REST・TypeORM)](https://zenn.dev/engineerhikaru/books/0a615c1248a2ea) 」をそのまま使わせていただきます。
+
+  - コード整形(ESLint,Prettier)の設定
+    - `eslintrc.js` を `.eslintrc.json` に変更: 今後 `.eslintrc.js` は廃止されていくようなのですが、移行先は `.eslint.config.js` らしいのですが、その件は後で。「[ESLint を eslintrc から Flat Config に移行する、ハマりポイントを添えて。](https://qiita.com/Shilaca/items/c494e4dc6b536a5231de)」
+    - `.prettierrc` を `.prettierrc.json` に変更: `rc` ファイルより `json` を優先するらしい。「[Prettier Configuration File](https://prettier.io/docs/en/configuration.html)」
+    - `workspace` 直下に `.vscode` フォルダを作成し、その直下に`settings.json` を作成: VSCode用設定ファイル
+
+.eslintrc.json
+```
+{
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier"
+  ]
+}
+```
+
+.prettierrc.json
+```
+{
+  "printWidth": 120,
+  "trailingComma": "all",
+  "tabWidth": 2,
+  "semi": false,
+  "singleQuote": true,
+  "jsxSingleQuote": true,
+  "endOfLine": "lf"
+}
+```
+
+.vscode/settings.json
+```
+{
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  }
+}
+```
+
+- インポートのエイリアス化: ファイルをインポートする時の可読性をよくするためにインポートのエイリアス化をする
+
+tsconfig.json
+```
+- "noFallthroughCasesInSwitch": false
++ "noFallthroughCasesInSwitch": false,
++ "paths": {
++   "@/*": ["./src/*"]
++ }
+}
+```
+

@@ -1,0 +1,28 @@
+./
+├── dist/
+├── migrations/
+├── node_modules/
+├── src/
+│   ├── config/
+│   ├── constants/
+│   ├── controllers/
+│   ├── entities/
+│   ├── models/
+│   ├── modules/
+│   ├── services/
+│   ├── app.controller.spec.ts
+│   ├── app.controller.ts
+│   ├── app.module.ts
+│   ├── app.service.ts
+│   └── main.ts
+├── test/
+│   ├── app.e2e-spec.ts
+│   └── jest-e2e.json
+├── .eslintrc.js
+├── .prettierrc
+├── nest-cli.json
+├── package.json
+├── package-lock.json
+├── README.md
+├── tsconfig.build.json
+└── tsconfig.json

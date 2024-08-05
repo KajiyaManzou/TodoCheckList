@@ -1,0 +1,1 @@
+tree -aF -L 2 -I .git  | sed 's/   /\t/g' > ../tree.txt
