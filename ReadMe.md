@@ -113,23 +113,59 @@ node ➜ /workspace/server $
 - セットアップ: こちらも、「[簡易TODOウェブアプリの開発-Next.js×NestJS(REST・TypeORM)](https://zenn.dev/engineerhikaru/books/0a615c1248a2ea) 」をそのまま使わせていただきます。
 
   - コード整形(ESLint,Prettier)の設定
-    - `eslintrc.js` を `.eslintrc.json` に変更: 今後 `.eslintrc.js` は廃止されていくようなのですが、移行先は `.eslint.config.js` らしいのですが、その件は後で。「[ESLint を eslintrc から Flat Config に移行する、ハマりポイントを添えて。](https://qiita.com/Shilaca/items/c494e4dc6b536a5231de)」
+    - ~~`.eslintrc.js` を `.eslintrc.json` に変更: 今後 `.eslintrc.js` は廃止されていくようなのですが、移行先は `.eslint.config.js` らしいのですが、その件は後で。「[ESLint を eslintrc から Flat Config に移行する、ハマりポイントを添えて。](https://qiita.com/Shilaca/items/c494e4dc6b536a5231de)」~~
+    - `.eslintrc.js` を `eslint.config.mjs` に変更：　今回構築した環境では設定ファイルが新版に変わっていた。コマンド `npm create @eslint/config` で作成。実行は `eslint ソースファイル名` でOK
     - `.prettierrc` を `.prettierrc.json` に変更: `rc` ファイルより `json` を優先するらしい。「[Prettier Configuration File](https://prettier.io/docs/en/configuration.html)」
     - `workspace` 直下に `.vscode` フォルダを作成し、その直下に`settings.json` を作成: VSCode用設定ファイル
 
-.eslintrc.json
+`npm create @eslint/config` を実行
 ```
-{
-  "extends": [
-    "eslint:recommended",
-    "plugin:@typescript-eslint/recommended",
-    "prettier"
-  ]
-}
+node ➜ /workspace/server $  npm create @eslint/config
+
+> server@0.0.1 npx
+> create-config
+
+@eslint/create-config: v1.2.0
+
+✔ How would you like to use ESLint? · syntax
+✔ What type of modules does your project use? · esm
+✔ Which framework does your project use? · none
+✔ Does your project use TypeScript? · typescript
+✔ Where does your code run? · browser
+The config that you've selected requires the following dependencies:
+
+eslint@9.x, globals, typescript-eslint
+✔ Would you like to install them now? · No / Yes
+✔ Which package manager do you want to use? · npm
+☕️Installing...
+
+...
+
+found 0 vulnerabilities
+A config file was generated, but the config file itself may not follow your linting rules.
+Note that some plugins currently do not support ESLint v9 yet.
+You may need to use '--force' when installing, or add the following to your package.json: 
+"overrides": { "eslint": "^9.8.0" } 
+node ➜ /workspace/server $ 
 ```
 
+メッセージにあるように `package.json` に `"overrides": { "eslint": "^9.8.0" } ` を追加
+
+eslint.config.mjs
+~~~javascript
+import globals from "globals";
+import tseslint from "typescript-eslint";
+
+
+export default [
+  {files: ["**/*.{js,mjs,cjs,ts}"]},
+  {languageOptions: { globals: globals.browser }},
+  ...tseslint.configs.recommended,
+];
+~~~
+
 .prettierrc.json
-```
+~~~json
 {
   "printWidth": 120,
   "trailingComma": "all",
@@ -137,12 +173,13 @@ node ➜ /workspace/server $
   "semi": false,
   "singleQuote": true,
   "jsxSingleQuote": true,
-  "endOfLine": "lf"
+  "endOfLine": "lf",
+  "parser": "typescript"
 }
-```
+~~~
 
 .vscode/settings.json
-```
+~~~json
 {
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
@@ -150,17 +187,17 @@ node ➜ /workspace/server $
     "source.fixAll.eslint": true
   }
 }
-```
+~~~
 
 - インポートのエイリアス化: ファイルをインポートする時の可読性をよくするためにインポートのエイリアス化をする
 
 tsconfig.json
-```
+~~~json
 - "noFallthroughCasesInSwitch": false
 + "noFallthroughCasesInSwitch": false,
 + "paths": {
 +   "@/*": ["./src/*"]
 + }
 }
-```
+~~~
 
