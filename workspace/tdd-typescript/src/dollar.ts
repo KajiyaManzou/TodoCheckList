@@ -12,7 +12,6 @@ export class Dollar {
     equals(object: object): boolean {
         if (!(object instanceof Dollar)) return false;
         if (JSON.stringify(this) === JSON.stringify(object)) return true;
-        //if(this._amount == object.amount) return true;
         return false;
     };
 

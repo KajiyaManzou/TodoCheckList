@@ -1,4 +1,6 @@
+
 import { Dollar } from '../src/dollar';
+import { Franc } from '../src/franc';
 
 test("$5 * 2 = $10", () => {
     const five = new Dollar(5);
@@ -19,4 +21,10 @@ test("multiplication", () =>{
   const five = new Dollar(5);
   expect(five.times(2).equals(new Dollar(10))).toBeTruthy();
   expect(five.times(3).equals(new Dollar(15))).toBeTruthy();
+})
+
+test("test Franc Multiplication", () => {
+  const five = new Franc(5);
+  expect(five.times(2).equals(new Franc(10))).toBeTruthy();
+  expect(five.times(3).equals(new Franc(15))).toBeTruthy();
 })
