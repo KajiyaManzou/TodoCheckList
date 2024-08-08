@@ -14,3 +14,9 @@ test("equal object", () => {
     const dt = new Date();
     expect(new Dollar(5).equals(dt)).toBeFalsy();
 });
+
+test("multiplication", () =>{
+  const five = new Dollar(5);
+  expect(five.times(2).equals(new Dollar(10))).toBeTruthy();
+  expect(five.times(3).equals(new Dollar(15))).toBeTruthy();
+})
