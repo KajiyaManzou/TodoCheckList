@@ -1,7 +1,7 @@
 # TodoCheckList アプリ
 
 自分用に Todo + CHeckList アプリがあるといいなと言う事でを作る事にした。
-独学用に NestJS(nodeJs + Typescript) + DB(MySQL + Rdis) & Flutter で作ってみることにした。
+独学用に NestJS(nodeJs + Typescript) + DB(MySQL + Rdis) & Flutter で作ってみる。
 
 ## システム構成
 
@@ -11,7 +11,9 @@ Mac にて。エディタは VSCode。
 
 ### サーバーサイド
 
-NestJS が面白そうなので採用。Zenn にある [NestJSの本一覧](https://zenn.dev/topics/nestjs?tab=books)を参考に。
+NestJS が面白そうなので採用。Zenn に NestJS 関する情報が集まっているので参考に。
+
+参考：[NestJSの本一覧](https://zenn.dev/topics/nestjs?tab=books)
 
 ### クライアントサイド
 
@@ -79,7 +81,9 @@ node ➜ /workspace/server $
 - サーバー起動確認: ブラウザで `http://localhost:3000` を開いて Hello World! を表示すればOK.
 ![初期画面](./docs/initialView.png)
 
-- フォルダ構成: 初心者なので、[簡易TODOウェブアプリの開発-Next.js×NestJS(REST・TypeORM)](https://zenn.dev/engineerhikaru/books/0a615c1248a2ea) をそのまま使わせていただきます。dto フォルダは entities に変更、マイグレーション用フォルダ migrations を追加。
+- フォルダ構成: 初心者なので、書籍の構成をそのまま使わせていただきます。名称がちょっと気になったので `models/` フォルダは `entities/` に変更、マイグレーション用フォルダ `migrations/` を追加。
+
+参考：[簡易TODOウェブアプリの開発-Next.js×NestJS(REST・TypeORM)](https://zenn.dev/engineerhikaru/books/0a615c1248a2ea) 
 
 ```
 ./
@@ -90,9 +94,9 @@ node ➜ /workspace/server $
 │   ├── config/
 │   ├── constants/
 │   ├── controllers/
+│   ├── dto/
 │   ├── entities/
 │   ├── models/
-│   ├── modules/
 │   ├── services/
 │   ├── app.controller.spec.ts
 │   ├── app.controller.ts
@@ -112,7 +116,9 @@ node ➜ /workspace/server $
 └── tsconfig.json
 ```
 
-- セットアップ: こちらも、「[簡易TODOウェブアプリの開発-Next.js×NestJS(REST・TypeORM)](https://zenn.dev/engineerhikaru/books/0a615c1248a2ea) 」をそのまま使わせていただきます。
+- セットアップ: こちらも、書籍のセットアップをそのまま使用。
+
+参考：「[簡易TODOウェブアプリの開発-Next.js×NestJS(REST・TypeORM)](https://zenn.dev/engineerhikaru/books/0a615c1248a2ea) 」
 
   - コード整形(ESLint,Prettier)の設定
     - ~~`.eslintrc.js` を `.eslintrc.json` に変更: 今後 `.eslintrc.js` は廃止されていくようなのですが、移行先は `.eslint.config.js` らしいのですが、その件は後で。「[ESLint を eslintrc から Flat Config に移行する、ハマりポイントを添えて。](https://qiita.com/Shilaca/items/c494e4dc6b536a5231de)」~~
@@ -205,9 +211,11 @@ tsconfig.json
 
 ### データベース構築
 
-データベースは MySQL を利用。
+データベースは MySQL を利用。最初最新バージョン(9.0)を利用しようとしたが、どうしても TypeORM でログインできなかった。今回は MySQL のバージョンを 8.0 に変更した。おそらく `mysql_native_password` を利用できなかった事が原因だと思われる。
 
-- ログイン: 
+参考：[MySQL8.4での mysql_native_password 認証プラグインの扱い](https://blog.s-style.co.jp/2024/05/11793/)
+
+- ログイン: ターミナルから別コンテナの MySQL にログイン
 
 ~~~log
 node ➜ /workspace $ mysql -u root -p -h mysql
@@ -461,3 +469,82 @@ MySQL [tododb]> DESCRIBE tag_maps;
 
 MySQL [tododb]> 
 ```
+
+### Model: クエリ
+
+必要なクエリを設計。NestJS(TypeORM)ではRepositoryを使ってデータを操作するらしい。つまり、このクエリを Repository に変換が必要だ。
+
+- データ作成
+
+```sql
+insert into todos values('aaaa1111', 'todo1', 'todo1 read books', NOW(), CAST('1900-01-01' as date), 0);
+insert into todos values('aaaa1112', 'todo2', 'todo2 ride bike', NOW(), CAST('1900-01-01' as date), 0);
+insert into todos values('aaaa1113', 'todo3', 'todo3 create program', NOW(), CAST('1900-01-01' as date), 0);
+
+insert into tags values('bbbb1111', 'private', NOW(), CAST('1900-01-01' as date), 0);
+insert into tags values('bbbb1112', 'work', NOW(), CAST('1900-01-01' as date), 0);
+
+insert into tag_maps values('cccc1111', 'aaaa1111', 'bbbb1111');
+insert into tag_maps values('cccc1113', 'aaaa1113', 'bbbb1112');
+```
+
+- todo一覧
+
+```sql
+select t.*, ifnull(g.tag, '') as tag from todos as t left outer join tag_maps as m on t.id = m.todoid left outer join tags as g on m.tagId = g.id;
+```
+
+- todo削除
+
+```sql
+delete from todos where id = '*******';
+```
+
+- todo更新
+
+```sql
+update todos set title = '******', todo = '*******' where id = '********';
+```
+
+- todo抽出
+
+```sql
+select t.*, ifnull(g.tag, '') as tag from todos as t left outer join tag_maps as m on t.id = m.todoid left outer join tags as g on m.tagId = g.id where t.id = '******';
+```
+
+- tag一覧
+
+```sql
+select * from tags;
+```
+
+- tag削除
+
+```sql
+delete from tags where id = '*******';
+```
+
+- tag更新
+
+```sql
+update tags set tag = '******' where id = '*********';
+```
+
+- tag_maps削除
+
+```sql
+delete tag_maps where id = '********';
+```
+
+---
+
+ここから開発工程に入ることになる。Typescript + TDD で開発したいのだがやった事がないのでよくわからない。と言うわけで、 Typescript + TDD の修行を先にする事にする。現在の環境で覚えたいので `workspace/` に別のプロジェクトを作ってやってみることにする。
+
+[Typescript + TDD 入門](./workspace/tdd-typescript/Readme.md)
+
+---
+
+### Model: DTO
+
+アプリの各階層を移動するオブジェクト = DTO を設計。
+
