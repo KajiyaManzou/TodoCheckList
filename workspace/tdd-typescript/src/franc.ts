@@ -6,7 +6,7 @@ export class Franc extends Money {
         this._amount = amount;
     };
 
-    public times(multiplier: number): Franc {
+    public times(multiplier: number): Money {
         return new Franc(this._amount * multiplier);
     };
 }
