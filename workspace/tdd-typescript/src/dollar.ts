@@ -1,7 +1,8 @@
-export class Dollar {
-    private _amount: number = 0;
+import { Money } from './money';
 
+export class Dollar extends Money {
     constructor(amount: number) {
+        super();
         this._amount = amount;
     };
 
@@ -9,13 +10,4 @@ export class Dollar {
         return new Dollar(this._amount * multiplier);
     };
 
-    equals(object: object): boolean {
-        if (!(object instanceof Dollar)) return false;
-        if (JSON.stringify(this) === JSON.stringify(object)) return true;
-        return false;
-    };
-
-    get amount(): number {
-        return this._amount;
-    }
 }
