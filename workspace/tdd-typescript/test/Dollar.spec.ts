@@ -9,9 +9,10 @@ test("test Multiplication", () => {
 
 test("test Equality", () =>{
   expect(new Dollar(5).equals(new Dollar(5))).toBeTruthy();
-  expect(new Dollar(10).equals(new Dollar(10))).toBeTruthy();
+  expect(new Dollar(5).equals(new Dollar(6))).toBeFalsy();
   expect(new Franc(5).equals(new Franc(5))).toBeTruthy();
-  expect(new Franc(10).equals(new Franc(10))).toBeTruthy();
+  expect(new Franc(5).equals(new Franc(6))).toBeFalsy();
+  expect(new Franc(5).equals(new Dollar(5))).toBeFalsy();
 })
 
 test("test Franc Multiplication", () => {

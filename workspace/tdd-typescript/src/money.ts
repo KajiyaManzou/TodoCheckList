@@ -3,8 +3,7 @@ export class Money {
 
     public equals(object: object): boolean {
         if (!(object instanceof Money)) return false;
-        if (this._amount === object._amount) return true;
-        return false;
+        return this._amount === object._amount && this.constructor.name === object.constructor.name;
     }
 
     get amount(): number {
