@@ -291,6 +291,7 @@ node ➜ /workspace/tdd-typescript $
 
 ```json
   "scripts": {
+    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "jest"
   }
 ```
@@ -298,3 +299,9 @@ node ➜ /workspace/tdd-typescript $
 ### 環境構築: フォルダ追加
 
 フォルダ `src/`, `test/` を追加
+
+### テスト駆動開発　
+
+書籍に沿って、淡々と進める。Typescriptでのテスト駆動開発の進め方を理解できた。
+
+[元に戻る](../../ReadMe.md)
