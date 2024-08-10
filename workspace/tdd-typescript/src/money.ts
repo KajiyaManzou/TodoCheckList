@@ -1,5 +1,8 @@
+export interface Expression {
+    
+}
 
-export class Money {
+export class Money implements Expression {
     protected _amount: number;
     protected _currency: string;
 
@@ -18,13 +21,17 @@ export class Money {
         return this._amount;
     };
 
+    get currency(): string {
+        return this._currency;
+    };
+
     public times(multiplier: number): Money {
         return new Money(this._amount * multiplier, this._currency);
     };
 
-    public currency(): string {
-        return this._currency;
-    };
+    public plus(addend: Money): Expression {
+        return new Money(this._amount + addend.amount, this.currency);
+    }
 
     public static Dollar(amount: number): Money {
         return new Money(amount, "USD");
@@ -33,4 +40,10 @@ export class Money {
     public static Franc(amount: number): Money {
         return new Money(amount, "CHF");
     };
+}
+
+export class Bank {
+    public reduce(source: Expression, to: string): Money {
+        return Money.Dollar(10);
+    }
 }
