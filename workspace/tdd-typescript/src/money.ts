@@ -1,6 +1,5 @@
-export interface Expression {
-    
-}
+import { Expression } from "./Expression";
+import { Sum } from "./Sum";
 
 export class Money implements Expression {
     protected _amount: number;
@@ -30,7 +29,11 @@ export class Money implements Expression {
     };
 
     public plus(addend: Money): Expression {
-        return new Money(this._amount + addend.amount, this.currency);
+        return new Sum(this, addend);
+    }
+
+    public reduce(to: string) {
+        return this;
     }
 
     public static Dollar(amount: number): Money {
@@ -40,10 +43,4 @@ export class Money implements Expression {
     public static Franc(amount: number): Money {
         return new Money(amount, "CHF");
     };
-}
-
-export class Bank {
-    public reduce(source: Expression, to: string): Money {
-        return Money.Dollar(10);
-    }
 }
