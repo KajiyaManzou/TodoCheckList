@@ -4,6 +4,8 @@
 
 参考: [Jestでテスト駆動開発（TDD）を実践してみよう](https://tech.uzabase.com/entry/2021/03/17/165008)
 
+参考: [書籍「テスト駆動開発」をTypeScriptで勉強するときのつまづきポイント](https://zenn.dev/yuma_ito_bd/articles/1612b1f0c92cf4)
+
 
 ### 環境構築: Typescript
 

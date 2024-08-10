@@ -68,3 +68,23 @@ test("test Mixed Addition", () => {
   const result: Money = bank.reduce(fiveBucks.plus(tenFrancs), "USD");
   expect(Money.Dollar(10)).toEqual(result);
 })
+
+test("test Sum Plus Money", () => {
+  const fiveBucks: Expression = Money.Dollar(5);
+  const tenFrancs: Expression = Money.Franc(10);
+  const bank: Bank = new Bank();
+  bank.addRate("CHF", "USD", 2);
+  const sum: Expression = new Sum(fiveBucks, tenFrancs).plus(fiveBucks);
+  const result: Money = bank.reduce(sum, "USD");
+  expect(Money.Dollar(15)).toEqual(result);
+})
+
+test("test Sum Times", () => {
+  const fiveBucks: Expression = Money.Dollar(5);
+  const tenFrancs: Expression = Money.Franc(10);
+  const bank: Bank = new Bank();
+  bank.addRate("CHF", "USD", 2);
+  const sum: Expression = new Sum(fiveBucks, tenFrancs).times(2);
+  const result: Money = bank.reduce(sum, "USD");
+  expect(Money.Dollar(20)).toEqual(result);
+})
