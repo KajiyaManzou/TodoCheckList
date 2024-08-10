@@ -21,3 +21,8 @@ test("test Franc Multiplication", () => {
   expect(Money.Franc(10).amount).toBe(five.times(2).amount);
   expect(Money.Franc(15).amount).toBe(five.times(3).amount);
 })
+
+test("test Currency", () => {
+  expect(Money.Dollar(1).currency()).toBe("USD");
+  expect(Money.Franc(1).currency()).toBe("CHF");
+})

@@ -1,6 +1,12 @@
 
 export abstract class Money {
-    protected _amount: number = 0;
+    protected _amount: number;
+    protected _currency: string;
+
+    constructor(amount: number, currency: string) {
+        this._amount = amount;
+        this._currency = currency;
+    }
 
     public equals(object: object): boolean {
         if (!(object instanceof Money)) return false;
@@ -13,34 +19,35 @@ export abstract class Money {
 
     public abstract times(multiplier: number): Money;
 
+    public currency(): string {
+        return this._currency;
+    }
+
     public static Dollar(amount: number): Money {
-        return new Dollar(amount);
+        return new Dollar(amount, "USD");
     }
 
     public static Franc(amount: number): Money {
-        return new Franc(amount);
+        return new Franc(amount, "CHF");
     }
 }
 
 export class Dollar extends Money {
-    constructor(amount: number) {
-        super();
-        this._amount = amount;
-    };
-
-    times(multiplier: number): Money {
-        return new Dollar(this._amount * multiplier);
-    };
-
-}
-
-export class Franc extends Money {
-    constructor(amount: number) {
-        super();
-        this._amount = amount;
+    constructor(amount: number, currency: string) {
+        super(amount, currency);
     };
 
     public times(multiplier: number): Money {
-        return new Franc(this._amount * multiplier);
+        return Money.Dollar(this._amount * multiplier);
+    };
+}
+
+export class Franc extends Money {
+    constructor(amount: number, currency: string) {
+        super(amount, currency);
+    };
+
+    public times(multiplier: number): Money {
+        return Money.Franc(this._amount * multiplier);
     };
 }
