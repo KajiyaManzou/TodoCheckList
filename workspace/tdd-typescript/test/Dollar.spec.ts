@@ -48,3 +48,14 @@ test("test Reduce Money", () => {
   const result: Money = bank.reduce(Money.Dollar(1), "USD");
   expect(Money.Dollar(1)).toEqual(result);
 })
+
+test("test Reduce Money Different Currency", () => {
+  const bank: Bank = new Bank();
+  bank.addRate("CHF", "USD", 2);
+  const result: Money = bank.reduce(Money.Franc(2), "USD");
+  expect(Money.Dollar(1)).toEqual(result);
+})
+
+test("test Identity Rate", () => {
+  expect(1).toBe(new Bank().rate("USD", "USD"));
+})
