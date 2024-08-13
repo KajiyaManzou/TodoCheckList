@@ -1,0 +1,33 @@
+@startuml
+
+package "Todos & CheckList Sysytem" as target_system {
+
+    entity "Todo テーブル" as todos <<主>>  {
+        + todoID [PK]
+        --
+        タイトル
+        Todo
+        作成日
+        更新日
+        削除フラグ
+    }
+
+    entity "Tag テーブル" as tags {
+        + tagID [PK]
+        --
+        タグ
+        作成日
+        更新日
+        削除フラグ
+    }
+
+    entity "Tagマップ テーブル" as tagMaps {
+        + mapID [PK]
+        --
+        todoID [FK]
+        tagID [FK]
+    }
+
+    todos --ri-- tagMaps
+    tagMaps --ri-- tags
+@enduml

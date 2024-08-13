@@ -302,6 +302,6 @@ node ➜ /workspace/tdd-typescript $
 
 ### テスト駆動開発　
 
-書籍に沿って、淡々と進める。Typescriptでのテスト駆動開発の進め方を理解できた。
+書籍に沿って、淡々と進める。Typescriptでのテスト駆動開発の進め方はおおよそOK。
 
 [元に戻る](../../ReadMe.md)
