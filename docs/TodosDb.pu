@@ -1,6 +1,6 @@
 @startuml
 
-package "Todos & CheckList Sysytem" as target_system {
+package "Todos & CheckList Sysytem" as TodosAndCheckList {
 
     entity "Todo テーブル" as todos <<主>>  {
         + todoID [PK]

@@ -1,0 +1,63 @@
+@startuml
+
+package todos {
+
+
+class Todo {
+    - ID : string
+    - Todo: string
+    - Tags: string[]
+    - ChildTodos: Todo[]
+    - ExpiryDate: DateTime
+    - CreateDate: DateTime
+    - UpdateDate: DateTime
+    - IsClose: boolean
+    + constractor(Todo: string, class: string, tag: string, expiryDate: DateTime): Todo
+    + AddTag(id: string, tag: sring): Todo
+    + DeleteTag(id: string, tag: string): Todo
+    + AddChildTodo(id: string, childTodoId: string): Todo
+    + DeleteChildTodo(id: string, childTodoId: string): Todo
+    + UpdateTodo(id: string, Todo: string, class: string, expiryDate: DateTime): Todo
+    + CloseTodo(id: string): Todo
+    + UncloseTodo(id: string): Todo
+    + DeleteTodo(id: string): boolean
+}
+
+interface iTodo {
+    + AddTag(id: string, tag: sring): Todo
+    + DeleteTag(id: string, tag: string): Todo
+    + AddChildTodo(id: string, childTodoId: string): Todo
+    + DeleteChildTodo(id: string, childTodoId: string): Todo
+    + UpdateTodo(id: string, Todo: string, class: string, expiryDate: DateTime): Todo
+    + CloseTodo(id: string): Todo
+    + UncloseTodo(id: string): Todo
+    + DeleteTodo(id: string): boolean
+}
+
+class TodoClass {
+    - ID: string
+    - Class: sgring
+    - Todos: Todo[]
+    - CreateDate: DateTime
+    - UpdateDate: DateTime
+    + constractor(class: string): TodoClass
+    + UpdateTodoClass(id: string, class: string): TodoClass
+    + DeleteTodoClass(id: string): boolean
+    + AddTodo(id: string, todoId: string) TodoClass
+    + DeleteTodo(id: string, todoId: string) TodoCass
+}
+
+interface iTodoClass {
+    + UpdateTodoClass(id: string, class: string): TodoClass
+    + DeleteTodoClass(id: string): boolean
+    + AddTodo(id: string, todoId: string) TodoClass
+    + DeleteTodo(id: string, todoId: string) TodoCass
+}
+
+}
+
+Todo --le--* TodoClass
+iTodo <|.. Todo
+iTodoClass <|.. TodoClass
+
+@enduml

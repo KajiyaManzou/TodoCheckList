@@ -1,0 +1,60 @@
+@startuml
+
+package CheckLists {
+class CheckList {
+    - ID: string
+    - Title: string
+    - CheckItems: CheckItem[]
+    - ExpiryDate: DateTime
+    - CreateDate: DateTime
+    - UpdateDate: DateTime
+    - IsClose: boolean
+    + constractor(title: string, expiryDate: DateTime): CheckList
+    + UpdateCheckList(id: string, title: string, expiryDate: DateTime): CheckList
+    + DeleteCHeckList(id: string): boolean
+    + AddCheckItem(id: string, checkItemId: string) CheckList
+    + DeleteCheckItem(id: string, checkItemId: string) CheckList
+}
+
+class TemplateCheckList {
+    - isTemplate: boolean
+    + constractor(checkList: CheckList): TemplateCheckList
+    + CreateCheckList(title: string, expiryDate: DateTime): CheckList
+}
+
+interface iCheckList {
+    + UpdateCheckList(id: string, title: string, expiryDate: DateTime): CheckList
+    + DeleteCHeckList(id: string): boolean
+    + AddCheckItem(id: string, checkItemId: string) CheckList
+    + DeleteCheckItem(id: string, checkItemId: string) CheckList
+}
+
+class CheckItem {
+    - ID: string
+    - title: string
+    - CreateDate: DateTime
+    - UpdateDate: DateTime
+    - IsClose: boolean
+    + constractor(title: string): CheckItem
+    + UpdateCheckItem(id: string, title: string): CheckItem
+    + CloseCheckItem(id: strng): CheckItem
+    + UncloseCheckItem(id: string): CheckItem
+    + DeleteCheckItem(id: string): boolean
+}
+
+interface iCheckItem {
+    + UpdateCheckItem(id: string, title: string): CheckItem
+    + CloseCheckItem(id: strng): CheckItem
+    + UncloseCheckItem(id: string): CheckItem
+    + DeleteCheckItem(id: string): boolean
+}
+
+}
+
+CheckList *--ri-- CheckItem
+CheckList <|-- TemplateCheckList
+TemplateCheckList *--ri-- CheckItem
+iCheckList <|.. CheckList
+iCheckItem <|.. CheckItem
+
+@enduml
