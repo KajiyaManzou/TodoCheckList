@@ -598,7 +598,7 @@ delete tag_maps where id = '********';
 
 仮に作ったテーブルと項目が違う事がよくわかるが、データベースのマイグレーションは後回し。保存しない Todos & CheckList を作ることにする。
 
-ザクっとクラス図を作る
+ザクっとクラス図を作る。
 
 ![TodoUML](./docs/TodoUml/TodoUml.png)
 

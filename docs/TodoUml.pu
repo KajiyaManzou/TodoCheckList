@@ -12,12 +12,15 @@ class Todo {
     - CreateDate: DateTime
     - UpdateDate: DateTime
     - IsClose: boolean
-    + constractor(Todo: string, class: string, tag: string, expiryDate: DateTime): Todo
+    + constractor(Todo: string): Todo
+    + constractor(Todo: string, todoClass: string): Todo
+    + constractor(Todo: string, todoClass: string, tag: string): Todo
+    + constractor(Todo: string, todoClass: string, tag: string, expiryDate: DateTime): Todo
     + AddTag(id: string, tag: sring): Todo
     + DeleteTag(id: string, tag: string): Todo
     + AddChildTodo(id: string, childTodoId: string): Todo
     + DeleteChildTodo(id: string, childTodoId: string): Todo
-    + UpdateTodo(id: string, Todo: string, class: string, expiryDate: DateTime): Todo
+    + UpdateTodo(id: string, Todo: string, todoClass: string, expiryDate: DateTime): Todo
     + CloseTodo(id: string): Todo
     + UncloseTodo(id: string): Todo
     + DeleteTodo(id: string): boolean
@@ -54,10 +57,27 @@ interface iTodoClass {
     + DeleteTodo(id: string, todoId: string) TodoCass
 }
 
+class Tag {
+    - ID: string
+    - Tag: string
+    - CreateDate: DateTime
+    - UpdateDate: DateTime
+    + constrator(tag: string): Tag
+    + UpdateTag(ID: strng, tag: string) Tag
+    + DeleteTag(ID): boolean
+}
+
+interface iTag {
+    + UpdateTag(ID: strng, tag: string) Tag
+    + DeleteTag(ID): boolean 
+}
+
 }
 
 Todo --le--* TodoClass
+Tag --le--o Todo
 iTodo <|.. Todo
 iTodoClass <|.. TodoClass
+iTag <|.. Tag
 
 @enduml
