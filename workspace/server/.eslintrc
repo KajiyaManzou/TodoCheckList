@@ -1,0 +1,4 @@
+{
+    "plugins": ["jsdoc"],
+    "extends": ["plugin:jsdoc/recommended-typescript-error"]
+  }

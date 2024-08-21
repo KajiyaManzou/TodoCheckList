@@ -28,6 +28,7 @@ class Todo {
     + import(todoObj: Todo): void
 }
 
+/'
 interface iTodo {
     + addTag(id: string, tag: sring): Todo
     + deleteTag(id: string, tag: string): Todo
@@ -39,6 +40,7 @@ interface iTodo {
     + delete(id: string): boolean
     + import(todoObj: Todo): void
 }
+'/
 
 class TodoList {
     - _id: string
@@ -53,7 +55,7 @@ class TodoList {
     - findTodo(queriid: string): Todo
 }
 
-class TodoClass {
+class TodoType {
     - _id: string
     - _name: string
     - _createDate: Date
@@ -63,12 +65,14 @@ class TodoClass {
     + delete(id: string): boolean
 }
 
+/'
 interface iTodoClass {
     + update(id: string, class: string): TodoClass
     + delete(id: string): boolean
 }
+'/
 
-class TodoClassList {
+class TodoTypeList {
     - _id: string
     _ _name: string
     + constractor()
@@ -89,19 +93,31 @@ class Tag {
     + delete(id): boolean
 }
 
+class Todos {
+    - _todoList: TodoList
+    - _todoClassList: TodoClassList
+    + constractor(): Todos
+    + addTodoType(todoTypeObj: TodoType): boolean
+    + addTodo(todoObj: Todo): boolean
+}
+/'
 interface iTag {
     + update(id: string, tag: string) Tag
     + delete(id: string): boolean 
 }
-
+'/
 }
 
-iTodo --* TodoList
-iTodoClass --* TodoClassList
-Todo --le-- TodoClass
+TodoList -- Todos
+TodoTypeList -- Todos
+Todo --* TodoList
+TodoType --* TodoTypeList
+Todo --le-- TodoType
 Tag --le--o Todo
+/'
 iTodo <|.. Todo
 iTodoClass <|.. TodoClass
 iTag <|.. Tag
+'/
 
 @enduml

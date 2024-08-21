@@ -1,4 +1,4 @@
-import { TodoClass } from '../src/modules/TodoClass';
+import { TodoType } from '../src/modules/TodoType';
 import { Todo } from '../src/modules/Todo';
 
 test("create Todo object", () => {
@@ -15,13 +15,13 @@ test("create Todo object not equal id, createDate", () => {
 })
 
 test("create TodoClass object", () => {
-  const todoClass = new TodoClass("inbox");
-  expect(todoClass.todoClass).toBe("inbox");
+  const todoType = new TodoType("inbox");
+  expect(todoType.todoType).toBe("inbox");
 })
 
 test("create TodoClass object not equal id, createDate", () => {
-  const todoClass1 = new TodoClass("inbox");
-  const todoClass2 = new TodoClass("today");
-  expect(todoClass1.todoClass).not.toBe(todoClass2.todoClass);
-  expect(todoClass1.createDate).not.toBe(todoClass2.createDate);
+  const todoType1 = new TodoType("inbox");
+  const todoType2 = new TodoType("today");
+  expect(todoType1.todoType).not.toBe(todoType2.todoType);
+  expect(todoType1.createDate).not.toBe(todoType2.createDate);
 })

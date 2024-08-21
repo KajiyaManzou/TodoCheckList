@@ -1,10 +1,14 @@
 import { Tag } from './Tag';
 import { randomUUID } from "crypto";
 
+/**
+ * Todo クラス
+ * @public 
+ */
 export class Todo {
     private  _id: string;
     private  _todo: string;
-    private  _todoClassId: string;
+    private  _todoTypeId: string;
     private  _tags: Tag[];
     private  _childTodos: Todo[]
     private  _expiryDate: Date;
@@ -24,6 +28,10 @@ export class Todo {
         this._isClose = false;
     }
 
+    /**
+     * Adds two numbers together.
+     * @returns {string} The sum of the two numbers.
+     */
     get todo(): string {
         return this._todo;
     }
@@ -51,7 +59,7 @@ export class Todo {
     public import(todoObj: Todo): void {
         this._id = todoObj._id;
         this._todo = todoObj._todo;
-        this._todoClassId = todoObj._todoClassId;
+        this._todoTypeId = todoObj._todoTypeId;
         this._tags = todoObj._tags;
         this._childTodos = todoObj._childTodos;
         this._expiryDate = todoObj._expiryDate;

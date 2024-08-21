@@ -612,4 +612,19 @@ delete tag_maps where id = '********';
 
 ![TodoUML](./docs/TodoUml/TodoUml01.png)
 
+### TsDoc
+
+プログラムソースにコメントを追記しようと思ったところでJavaのJavaDocのようなものがTypescriptにも無いのか調べてみると**TsDoc**と言うものがあるらしい。がしかし、Javaがなくては実行できない。コンポーネントにJavaをインストールする。
+
+参考：[TSDoc](https://zenn.dev/c_hero/scraps/8df7279932ae40)
+
+コメントは後で追記するのは面倒なので、ここでコメントを追記することにした。TsDocを必須化する方法もあったので試してみる。がしかし、全くうまくいかない。
+
+参考：[ESLint を使って JSDoc / TSDoc の記述を必須化する](https://zenn.dev/wakamsha/articles/setup-eslint-plugin-jsdoc)
+
+以下のコマンドでtypescriptファイルを読み込んでHTMLドキュメントを作成する。しかし、現在のブラウザは file:// でHTMLドキュメントを開く事ができない。いずれはMarkdownにしたいのだが、まずはHTMLを作成する。
+
+```command
+npx typedoc --out ./docs ./src/modules/Todo.ts
+```
 
