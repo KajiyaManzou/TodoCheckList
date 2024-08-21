@@ -1,4 +1,4 @@
-@startuml
+@startuml TodosDb01
 
 package "Todos & CheckList Sysytem" as TodosAndCheckList {
 

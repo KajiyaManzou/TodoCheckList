@@ -25,7 +25,7 @@ export class TodoList {
         const result: Todo = new Todo("temp");
         const tempTodo: Todo = this.findTodo(queryid);
         if (typeof tempTodo == "undefined") return tempTodo;
-        result.duplicate(tempTodo);
+        result.import(tempTodo);
         return result;
     }
 

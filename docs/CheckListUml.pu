@@ -1,4 +1,4 @@
-@startuml
+@startuml CheckListUml01
 
 package CheckLists {
 class CheckList {

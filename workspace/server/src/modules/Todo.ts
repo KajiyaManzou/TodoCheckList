@@ -48,7 +48,7 @@ export class Todo {
         return this;
     }
 
-    public duplicate(todoObj: Todo) {
+    public import(todoObj: Todo): void {
         this._id = todoObj._id;
         this._todo = todoObj._todo;
         this._todoClassId = todoObj._todoClassId;

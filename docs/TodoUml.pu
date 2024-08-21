@@ -1,80 +1,104 @@
-@startuml
+@startuml TodoUml01
 
 package todos {
 
 
 class Todo {
-    - ID : string
-    - Todo: string
-    - Tags: string[]
-    - ChildTodos: Todo[]
-    - ExpiryDate: DateTime
-    - CreateDate: DateTime
-    - UpdateDate: DateTime
-    - IsClose: boolean
+    - _id : string
+    - _todo: string
+    - _todoClassId: string
+    - _tags: Tag[]
+    - _childTodos: Todo[]
+    - _expiryDate: Date
+    - _createDate: Date
+    - _updateDate: Date
+    - _isClose: boolean
     + constractor(Todo: string): Todo
     + constractor(Todo: string, todoClass: string): Todo
     + constractor(Todo: string, todoClass: string, tag: string): Todo
     + constractor(Todo: string, todoClass: string, tag: string, expiryDate: DateTime): Todo
-    + AddTag(id: string, tag: sring): Todo
-    + DeleteTag(id: string, tag: string): Todo
-    + AddChildTodo(id: string, childTodoId: string): Todo
-    + DeleteChildTodo(id: string, childTodoId: string): Todo
-    + UpdateTodo(id: string, Todo: string, todoClass: string, expiryDate: DateTime): Todo
-    + CloseTodo(id: string): Todo
-    + UncloseTodo(id: string): Todo
-    + DeleteTodo(id: string): boolean
+    + addTag(id: string, tag: sring): Todo
+    + deleteTag(id: string, tag: string): Todo
+    + addChildTodo(id: string, childTodoId: string): Todo
+    + deleteChildTodo(id: string, childTodoId: string): Todo
+    + update(id: string, Todo: string, todoClass: string, expiryDate: DateTime): Todo
+    + close(id: string): Todo
+    + unclose(id: string): Todo
+    + delete(id: string): boolean
+    + import(todoObj: Todo): void
 }
 
 interface iTodo {
-    + AddTag(id: string, tag: sring): Todo
-    + DeleteTag(id: string, tag: string): Todo
-    + AddChildTodo(id: string, childTodoId: string): Todo
-    + DeleteChildTodo(id: string, childTodoId: string): Todo
-    + UpdateTodo(id: string, Todo: string, class: string, expiryDate: DateTime): Todo
-    + CloseTodo(id: string): Todo
-    + UncloseTodo(id: string): Todo
-    + DeleteTodo(id: string): boolean
+    + addTag(id: string, tag: sring): Todo
+    + deleteTag(id: string, tag: string): Todo
+    + addChildTodo(id: string, childTodoId: string): Todo
+    + deleteChildTodo(id: string, childTodoId: string): Todo
+    + update(id: string, Todo: string, class: string, expiryDate: DateTime): Todo
+    + close(id: string): Todo
+    + unclose(id: string): Todo
+    + delete(id: string): boolean
+    + import(todoObj: Todo): void
+}
+
+class TodoList {
+    - _id: string
+    - _name: string
+    - _todos: Todo[]
+    + constractor()
+    + constractor(name?: string)
+    + add(todo: Todo): Todo
+    + get(queriid: string): Todo
+    + update(queryid: string, todo: string): Todo
+    + delete(queryid: string): boolean
+    - findTodo(queriid: string): Todo
 }
 
 class TodoClass {
-    - ID: string
-    - Class: sgring
-    - Todos: Todo[]
-    - CreateDate: DateTime
-    - UpdateDate: DateTime
+    - _id: string
+    - _name: string
+    - _createDate: Date
+    - _updateDate: Date
     + constractor(class: string): TodoClass
-    + UpdateTodoClass(id: string, class: string): TodoClass
-    + DeleteTodoClass(id: string): boolean
-    + AddTodo(id: string, todoId: string) TodoClass
-    + DeleteTodo(id: string, todoId: string) TodoCass
+    + update(id: string, class: string): TodoClass
+    + delete(id: string): boolean
 }
 
 interface iTodoClass {
-    + UpdateTodoClass(id: string, class: string): TodoClass
-    + DeleteTodoClass(id: string): boolean
-    + AddTodo(id: string, todoId: string) TodoClass
-    + DeleteTodo(id: string, todoId: string) TodoCass
+    + update(id: string, class: string): TodoClass
+    + delete(id: string): boolean
+}
+
+class TodoClassList {
+    - _id: string
+    _ _name: string
+    + constractor()
+    + constractor(name?: string)
+    + add(todoClass: TodoClass): TodoClass
+    + get(queryid: string): TodoClass
+    + update(queryid: string, name: string): TodoClass
+    + delete(queryid: string): boolean
 }
 
 class Tag {
-    - ID: string
-    - Tag: string
-    - CreateDate: DateTime
-    - UpdateDate: DateTime
+    - _id: string
+    - _tag: string
+    - _createDate: Date
+    - _updateDate: Date
     + constrator(tag: string): Tag
-    + UpdateTag(ID: strng, tag: string) Tag
-    + DeleteTag(ID): boolean
+    + update(id: string, tag: string) Tag
+    + delete(id): boolean
 }
 
 interface iTag {
-    + UpdateTag(ID: strng, tag: string) Tag
-    + DeleteTag(ID): boolean 
+    + update(id: string, tag: string) Tag
+    + delete(id: string): boolean 
 }
 
 }
 
-Todo --le--* TodoClass
+iTodo --* TodoList
+iTodoClass --* TodoClassList
+Todo --le-- TodoClass
 Tag --le--o Todo
 iTodo <|.. Todo
 iTodoClass <|.. TodoClass

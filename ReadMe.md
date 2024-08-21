@@ -327,7 +327,7 @@ node ➜ /workspace/server $
 
 Todo用テーブルから作成してみる。作成するテーブルはこんな感じ。このテーブルをマイグレーションしていく。
 
-![Todosテーブル　ER図](./docs/TodosDb/TodosDb.png)
+![Todosテーブル　ER図](./docs/TodosDb/TodosDb00.png)
 
 今回インストールした TypeORM のバージョンは 0.3.20。どうやらバージョン 0.3系は色々変更があったようで慌てました。
 
@@ -598,11 +598,18 @@ delete tag_maps where id = '********';
 
 仮に作ったテーブルと項目が違う事がよくわかるが、データベースのマイグレーションは後回し。保存しない Todos & CheckList を作ることにする。
 
-ザクっとクラス図を作る。
+ここで、ザクっとクラス図を作る。
 
-![TodoUML](./docs/TodoUml/TodoUml.png)
+![TodoUML](./docs/TodoUml/TodoUml00.png)
 
-![CheckListUML](./docs/CheckListUml/CheckListUml.png)
+![CheckListUML](./docs/CheckListUml/CheckListUml00.png)
 
-### Model: Todos
+### Model: Todo
+
+とりあえず実装を開始。TDDでTodoクラスを実装してみた。途中でコレクションクラスとTodoクラスとTodoClassクラスを管理するクラスも欲しくなった。それと実装開始する前にTypescriptの命名規則、コーディング基準を調べてみた。するとクラス名はPascalCase、変数やメソッド名はCamelCaseで記述するのだ（そうかマイクロソフトだからC#と同じと言う訳だ）。と言うわけでクラス図を変更する。
+
+クラス図のレイアウトが酷いのだが、後で直すことにする。
+
+![TodoUML](./docs/TodoUml/TodoUml01.png)
+
 
