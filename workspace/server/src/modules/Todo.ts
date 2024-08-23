@@ -2,8 +2,7 @@ import { Tag } from './Tag';
 import { randomUUID } from "crypto";
 
 /**
- * Todo クラス
- * @public 
+ * Todoクラス 
  */
 export class Todo {
     private  _id: string;
@@ -16,6 +15,10 @@ export class Todo {
     private  _updateDate: Date;
     private  _isClose: boolean;
 
+    /**
+     * コンストラクタ
+     * @param todo Todo情報
+     */
     constructor(todo: string);
     constructor(todo: string, todoClass?: string);
     constructor(todo: string, todoClass?: string, tag?: string);
@@ -29,25 +32,43 @@ export class Todo {
     }
 
     /**
-     * Adds two numbers together.
-     * @returns {string} The sum of the two numbers.
+     * Todo情報 アクセサ
+     * @returns Todo情報
      */
     get todo(): string {
         return this._todo;
     }
 
+    /**
+     * 完了/未完フラグ サクセサ
+     * @returns true: 完了、false: 未完
+     */
     get isClose(): boolean {
         return this._isClose;
     }
 
+    /**
+     * TodoID アクセサ
+     * @returns TodoID
+     */
     get id(): string {
         return this._id;
     }
 
+    /**
+     * 作成日付 アクセサ
+     * @returns 開始日付
+     */
     get createDate(): Date {
         return this._createDate;
     }
-    
+
+    /**
+     * Todo更新メソッド　id をキーに対象の Todo オブジェクトを更新する
+     * @param id 更新対象 TodoID 
+     * @param todo 更新する Todo情報
+     * @returns 更新後Todo
+     */
     public update(id: string, todo: string): Todo {
         if (this._id != id) return null;
         if (todo == null) return null;
@@ -56,6 +77,10 @@ export class Todo {
         return this;
     }
 
+    /**
+     * Todoオブジェクト取り込みメソッド　todoObj の情報を自身に取り込む
+     * @param todoObj 取り込む Todo オブジェクト
+     */
     public import(todoObj: Todo): void {
         this._id = todoObj._id;
         this._todo = todoObj._todo;

@@ -1,12 +1,12 @@
-[**server**](../README.md) • **Docs**
+[**server**](../../README.md) • **Docs**
 
 ***
 
-[server](../globals.md) / Todo
+[server](../../README.md) / [Todo](../README.md) / Todo
 
 # Class: Todo
 
-Todo クラス
+Todoクラス
 
 ## Constructors
 
@@ -14,9 +14,13 @@ Todo クラス
 
 > **new Todo**(`todo`): [`Todo`](Todo.md)
 
+コンストラクタ
+
 #### Parameters
 
 • **todo**: `string`
+
+Todo情報
 
 #### Returns
 
@@ -24,7 +28,7 @@ Todo クラス
 
 #### Defined in
 
-Todo.ts:19
+Todo.ts:22
 
 ### new Todo()
 
@@ -42,7 +46,7 @@ Todo.ts:19
 
 #### Defined in
 
-Todo.ts:20
+Todo.ts:23
 
 ### new Todo()
 
@@ -62,7 +66,7 @@ Todo.ts:20
 
 #### Defined in
 
-Todo.ts:21
+Todo.ts:24
 
 ## Accessors
 
@@ -70,13 +74,17 @@ Todo.ts:21
 
 > `get` **createDate**(): `Date`
 
+作成日付 アクセサ
+
 #### Returns
 
 `Date`
 
+開始日付
+
 #### Defined in
 
-Todo.ts:47
+Todo.ts:62
 
 ***
 
@@ -84,13 +92,17 @@ Todo.ts:47
 
 > `get` **id**(): `string`
 
+TodoID アクセサ
+
 #### Returns
 
 `string`
 
+TodoID
+
 #### Defined in
 
-Todo.ts:43
+Todo.ts:54
 
 ***
 
@@ -98,13 +110,17 @@ Todo.ts:43
 
 > `get` **isClose**(): `boolean`
 
+完了/未完フラグ サクセサ
+
 #### Returns
 
 `boolean`
 
+true: 完了、false: 未完
+
 #### Defined in
 
-Todo.ts:39
+Todo.ts:46
 
 ***
 
@@ -112,17 +128,17 @@ Todo.ts:39
 
 > `get` **todo**(): `string`
 
-Adds two numbers together.
+Todo情報 アクセサ
 
 #### Returns
 
 `string`
 
-The sum of the two numbers.
+Todo情報
 
 #### Defined in
 
-Todo.ts:35
+Todo.ts:38
 
 ## Methods
 
@@ -130,9 +146,13 @@ Todo.ts:35
 
 > **import**(`todoObj`): `void`
 
+Todoオブジェクト取り込みメソッド　todoObj の情報を自身に取り込む
+
 #### Parameters
 
 • **todoObj**: [`Todo`](Todo.md)
+
+取り込む Todo オブジェクト
 
 #### Returns
 
@@ -140,7 +160,7 @@ Todo.ts:35
 
 #### Defined in
 
-Todo.ts:59
+Todo.ts:84
 
 ***
 
@@ -148,16 +168,24 @@ Todo.ts:59
 
 > **update**(`id`, `todo`): [`Todo`](Todo.md)
 
+Todo更新メソッド　id をキーに対象の Todo オブジェクトを更新する
+
 #### Parameters
 
 • **id**: `string`
 
+更新対象 TodoID
+
 • **todo**: `string`
+
+更新する Todo情報
 
 #### Returns
 
 [`Todo`](Todo.md)
 
+更新後Todo
+
 #### Defined in
 
-Todo.ts:51
+Todo.ts:72

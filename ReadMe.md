@@ -618,9 +618,31 @@ delete tag_maps where id = '********';
 
 参考：[TSDoc](https://zenn.dev/c_hero/scraps/8df7279932ae40)
 
-コメントは後で追記するのは面倒なので、ここでコメントを追記することにした。TsDocを必須化する方法もあったので試してみる。がしかし、全くうまくいかない。
+コメントは後で追記するのは面倒なので、ここでコメントを追記することにした。TsDocを必須化する方法もあったので試してみる。~~がしかし、全くうまくいかない。~~
+フラットconfigで設定を見直してうまくいった。
+
+```javascript
+import jsdoc from "eslint-plugin-jsdoc";
+
+export default [
+  ...
+  // configuration included in plugin
+  jsdoc.configs['flat/recommended-typescript-error'],
+  // other configuration objects...
+  {
+    plugins: {
+      jsdoc: jsdoc
+    },
+    rules: {
+      'jsdoc/require-throws': 'warn'
+    }
+  },
+  ....
+];
+```
 
 参考：[ESLint を使って JSDoc / TSDoc の記述を必須化する](https://zenn.dev/wakamsha/articles/setup-eslint-plugin-jsdoc)
+参考：[eslint-plugin-jsdoc](https://www.npmjs.com/package/eslint-plugin-jsdoc)
 
 以下のコマンドでtypescriptファイルを読み込んでHTMLドキュメントを作成する。
 
@@ -643,7 +665,7 @@ npx typedoc --plugin typedoc-plugin-markdown "src/index.ts"
 ```JSON
 {
   "scripts": {
-    "tsdoc": "npx typedoc --plugin typedoc-plugin-markdown"
+    "tsdoc": "npx typedoc --plugin typedoc-plugin-markdown --readme none"
   }
 }
 ```
