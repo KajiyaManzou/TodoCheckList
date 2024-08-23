@@ -622,9 +622,30 @@ delete tag_maps where id = '********';
 
 参考：[ESLint を使って JSDoc / TSDoc の記述を必須化する](https://zenn.dev/wakamsha/articles/setup-eslint-plugin-jsdoc)
 
-以下のコマンドでtypescriptファイルを読み込んでHTMLドキュメントを作成する。しかし、現在のブラウザは file:// でHTMLドキュメントを開く事ができない。いずれはMarkdownにしたいのだが、まずはHTMLを作成する。
+以下のコマンドでtypescriptファイルを読み込んでHTMLドキュメントを作成する。
 
 ```command
 npx typedoc --out ./docs ./src/modules/Todo.ts
 ```
 
+しかし、現在のブラウザは file:// でHTMLドキュメントを開く事ができない。生成ドキュメントをMarkdownにする方法を調べてみた。`typedon`と`typedoc-plugin-markdown`をインストールするだけでOK。
+
+```command
+npm install --save-dev typedoc typedoc-plugin-markdown
+```
+
+実行はこんな感じ。面倒なのでpackage.jsonにスクリプトを追加。
+
+```command
+npx typedoc --plugin typedoc-plugin-markdown "src/index.ts"
+```
+
+```JSON
+{
+  "scripts": {
+    "tsdoc": "npx typedoc --plugin typedoc-plugin-markdown"
+  }
+}
+```
+
+参考：[TypeScriptのJSDocからMarkdownでドキュメントを自動生成](https://qiita.com/Robot-Inventor/items/45e4733aa3f87e9b0b41)
