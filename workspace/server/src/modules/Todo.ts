@@ -62,23 +62,22 @@ export class Todo {
     get createDate(): Date {
         return this._createDate;
     }
-
     /**
-     * Todo更新メソッド　id をキーに対象の Todo オブジェクトを更新する
+     * Todo更新メソッド id をキーに対象の Todo オブジェクトを更新する
      * @param id 更新対象 TodoID 
      * @param todo 更新する Todo情報
-     * @returns 更新後Todo
+     * @returns 更新後Todo。IDがアンマッチ、todoがnull/emptyの場合はundefinedを返す。
      */
     public update(id: string, todo: string): Todo {
-        if (this._id != id) return null;
-        if (todo == null) return null;
+        if (this._id != id) return undefined;
+        if (todo === null) return undefined;
+        if (todo.length == 0) return undefined;
         this._todo = todo;
         this._updateDate = new Date();
         return this;
     }
-
     /**
-     * Todoオブジェクト取り込みメソッド　todoObj の情報を自身に取り込む
+     * Todoオブジェクト取り込みメソッド todoObj の情報を自身に取り込む
      * @param todoObj 取り込む Todo オブジェクト
      */
     public import(todoObj: Todo): void {
