@@ -8,9 +8,11 @@ export class TodoType {
     private  _todoType: string;
     private  _createDate: Date;
     private  _updateDate: Date;
+
     /**
      * コンストラクタ
      * @param todoType 区分名
+     * @example
      */
     constructor(todoType?: string) {
         this._id = randomUUID();
@@ -35,7 +37,7 @@ export class TodoType {
     }
     /**
      * Todo区分ID アクセサ
-     * @rturns Todo区分ID
+     * @returns Todo区分ID
      */
     get id(): string {
         return this._id;

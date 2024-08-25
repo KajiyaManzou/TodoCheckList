@@ -1,5 +1,6 @@
 import { randomUUID } from "crypto";
 import { Todo } from '../src/modules/Todo';
+import { isExportDeclaration } from "typescript";
 
 test("create Todo object", () => {
     const todo = new Todo("Todo1");
@@ -16,11 +17,17 @@ test("create Todo object not equal id, createDate", () => {
 
 test("update Todo object", () => {
   const todo = new Todo("Todo1");
-  expect(todo.update(randomUUID(), "Todo1A")).toBeUndefined();
-  expect(todo.update(todo.id, null)).toBeUndefined();
-  expect(todo.update(todo.id, "")).toBeUndefined();
-  const todo2: Todo = todo.update(todo.id, "Todo1A");
+  expect(todo.update(null)).toBeUndefined();
+  expect(todo.update("")).toBeUndefined();
+  const todo2: Todo = todo.update("Todo1A");
   expect(todo.todo).toBe("Todo1A");
   expect(todo.todo).not.toBe("Todo1");
   expect(todo2.todo).toBe("Todo1A");
 });
+
+test("close Todo objecct", () => {
+  const todo: Todo = new Todo("Todo1");
+  expect(todo.isClose).toBeFalsy();
+  todo.close();
+  expect(todo.isClose).toBeTruthy();
+})

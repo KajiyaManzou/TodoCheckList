@@ -15,13 +15,13 @@ export default [
   eslintConfigPrettier,
   ...compat.extends('plugin:@typescript-eslint/eslint-recommended', 'prettier'),
   // configuration included in plugin
-  jsdoc.configs['flat/recommended-typescript-error'],
+  //jsdoc.configs['flat/recommended-typescript-error'],
+  jsdoc.configs['flat/requirements-typescript-error'],
   //jsdoc.configs['flat/contents-typescript-error'],
   //jsdoc.configs['flat/logical-typescript-error'],
   //jsdoc.configs['flat/stylistic-typescript-error'],
   // other configuration objects...
   {
-    //files: ['**/*.ts'],
     plugins: {
       jsdoc: jsdoc
     },

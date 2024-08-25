@@ -7,7 +7,7 @@ test("create TodoList object", () => {
     const todo = new Todo("Todo1");
     todoList.add(todo);
     expect(todoList.get(todo.id).todo).toBe("Todo1");
-    todoList.get(todo.id).update(todo.id, "Todo1b");
+    todoList.get(todo.id).update("Todo1b");
     expect(todoList.get(todo.id).todo).toBe("Todo1");
     expect(todoList.get(randomUUID())).toBeUndefined();
 })
@@ -18,7 +18,7 @@ test("update Todo in Todolist", () => {
     todoList.add(todo);
     const updatedTodo: Todo = todoList.update(todo.id, "Todo1a");
     expect(todoList.get(todo.id).todo).toBe("Todo1a");
-    updatedTodo.update(updatedTodo.id, "Todo1b");
+    updatedTodo.update("Todo1b");
     expect(todoList.get(todo.id).todo).toBe("Todo1a");
     expect(todoList.update(randomUUID(), "Todo1a")).toBeUndefined();
 })

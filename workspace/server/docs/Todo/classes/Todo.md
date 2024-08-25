@@ -142,11 +142,34 @@ Todo.ts:38
 
 ## Methods
 
+### close()
+
+> **close**(): `void`
+
+Todoオブジェクト完了メソッド
+
+#### Returns
+
+`void`
+
+#### Example
+
+```
+const todo1:Todo = new odo("テスト駆動開発を読む");
+todo1.close();
+```
+
+#### Defined in
+
+Todo.ts:111
+
+***
+
 ### import()
 
 > **import**(`todoObj`): `void`
 
-Todoオブジェクト取り込みメソッド　todoObj の情報を自身に取り込む
+Todoオブジェクト取り込みメソッド todoObj の情報を自身に取り込む
 
 #### Parameters
 
@@ -158,23 +181,28 @@ Todoオブジェクト取り込みメソッド　todoObj の情報を自身に�
 
 `void`
 
+#### Example
+
+```
+const todo1: Todo = new Todo("テスト駆動開発を読む");
+...
+const todo2: Todo = new Todo("dummy");
+todo2.import(todo1);
+```
+
 #### Defined in
 
-Todo.ts:84
+Todo.ts:92
 
 ***
 
 ### update()
 
-> **update**(`id`, `todo`): [`Todo`](Todo.md)
+> **update**(`todo`): [`Todo`](Todo.md)
 
-Todo更新メソッド　id をキーに対象の Todo オブジェクトを更新する
+Todo更新メソッド id をキーに対象の Todo オブジェクトを更新する
 
 #### Parameters
-
-• **id**: `string`
-
-更新対象 TodoID
 
 • **todo**: `string`
 
@@ -184,8 +212,14 @@ Todo更新メソッド　id をキーに対象の Todo オブジェクトを更�
 
 [`Todo`](Todo.md)
 
-更新後Todo
+更新後Todo。todoがnull/emptyの場合はundefinedを返す。
+
+#### Example
+
+```
+todo.update("変更したTodo");
+```
 
 #### Defined in
 
-Todo.ts:72
+Todo.ts:74

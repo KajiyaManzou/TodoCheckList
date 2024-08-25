@@ -12,13 +12,13 @@ TodoType クラス Todoの区分/所属/分類分けする
 
 ### new TodoType()
 
-> **new TodoType**(`todoType`): [`TodoType`](TodoType.md)
+> **new TodoType**(`todoType`?): [`TodoType`](TodoType.md)
 
 コンストラクタ
 
 #### Parameters
 
-• **todoType**: `string`
+• **todoType?**: `string`
 
 区分名
 
@@ -26,9 +26,15 @@ TodoType クラス Todoの区分/所属/分類分けする
 
 [`TodoType`](TodoType.md)
 
+#### Example
+
+```ts
+
+```
+
 #### Defined in
 
-TodoType.ts:15
+TodoType.ts:17
 
 ## Accessors
 
@@ -42,15 +48,35 @@ TodoType.ts:15
 
 `Date`
 
+作成日付
+
 #### Defined in
 
-TodoType.ts:30
+TodoType.ts:35
 
 ***
 
-### todoType
+### id
 
-> `get` **todoType**(): `string`
+> `get` **id**(): `string`
+
+Todo区分ID アクセサ
+
+#### Returns
+
+`string`
+
+Todo区分ID
+
+#### Defined in
+
+TodoType.ts:42
+
+***
+
+### type
+
+> `get` **type**(): `string`
 
 区分名アクセサ
 
@@ -58,6 +84,28 @@ TodoType.ts:30
 
 `string`
 
+区分名
+
 #### Defined in
 
-TodoType.ts:24
+TodoType.ts:28
+
+## Methods
+
+### update()
+
+> **update**(`id`, `todoType`): [`TodoType`](TodoType.md)
+
+#### Parameters
+
+• **id**: `string`
+
+• **todoType**: `string`
+
+#### Returns
+
+[`TodoType`](TodoType.md)
+
+#### Defined in
+
+TodoType.ts:45
