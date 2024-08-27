@@ -47,4 +47,27 @@ test("update TodoType into TodoTypeList", () => {
     expect(todoTypeList1.update(randomUUID(),  "Project B")).toBeUndefined();
     expect(todoTypeList1.update(todoType5.id, null)).toBeUndefined();
     expect(todoTypeList1.update(todoType5.id, "")).toBeUndefined();
+    const todoTypeInbox = todoTypeList1.get();
+    expect(todoTypeList1.update(todoTypeInbox.id, "new Inbox")).toBeUndefined();
+})
+
+test("delete TodoType into TodoTypeList", () => {
+    const todoTypeList1: TodoTypeList = new TodoTypeList();
+    const todoType2: TodoType = new TodoType("someday");
+    const todoType3: TodoType = new TodoType("project");
+    const todoType4: TodoType = new TodoType("waiting for");
+    const todoType5: TodoType = new TodoType("Do it");
+    const todoType6: TodoType = new TodoType("calendar");
+    todoTypeList1.add(todoType2);
+    todoTypeList1.add(todoType3);
+    todoTypeList1.add(todoType4);
+    todoTypeList1.add(todoType5);
+    todoTypeList1.add(todoType6);
+    const todoTypeInbox = todoTypeList1.get();
+    expect(todoTypeList1.delete(todoTypeInbox.id)).toBeFalsy();
+    expect(todoTypeList1.delete(null)).toBeFalsy();
+    expect(todoTypeList1.delete(todoType5.id)).toBeTruthy();
+    expect(todoTypeList1.delete(todoType5.id)).toBeFalsy();
+    expect(todoTypeList1.delete(randomUUID())).toBeFalsy();
+    expect(todoTypeList1.get(todoType5.id)).toBeUndefined();
 })

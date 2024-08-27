@@ -66,6 +66,40 @@ TodoTypeList.ts:63
 
 ***
 
+### delete()
+
+> **delete**(`queryid`): `boolean`
+
+TodoTypeオブジェクト削除メソッド queryidをキーにTodoTypeオブジェクトを削除する
+
+#### Parameters
+
+• **queryid**: `string`
+
+削除するTodoTypeID
+
+#### Returns
+
+`boolean`
+
+true: 削除済、false: 削除失敗
+
+#### Example
+
+```typescript
+const todoTypeList: TodoTypeList = new TodoTypeList();
+const todoType: TodoType = new TodoType("Today");
+todoTypeList.add(todoType);
+todoTypeList.delete(todoType.id);
+console.log(todoTypeList.get(todoType.id));  // undefined
+```
+
+#### Defined in
+
+TodoTypeList.ts:101
+
+***
+
 ### get()
 
 > **get**(`queryid`?): [`TodoType`](../../TodoType/classes/TodoType.md)
@@ -133,7 +167,7 @@ TodoTypeオブジェクトを更新するメソッド
 const todoTypeList: TodoTypeList = new TodoTypeList();
 const todoType: TodoType = new TodoType("Today");
 todoTypeList.add(todoType);
-todoTypeList.update(todoType.id, "This Week")
+todoTypeList.update(todoType.id, "This Week");
 console.log(todoTypeList.get(todoType.id));  // This Week
 ```
 

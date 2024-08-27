@@ -74,7 +74,7 @@ export class TodoTypeList {
      * const todoTypeList: TodoTypeList = new TodoTypeList();
      * const todoType: TodoType = new TodoType("Today");
      * todoTypeList.add(todoType);
-     * todoTypeList.update(todoType.id, "This Week")
+     * todoTypeList.update(todoType.id, "This Week");
      * console.log(todoTypeList.get(todoType.id));  // This Week
      * ```
      */
@@ -86,9 +86,29 @@ export class TodoTypeList {
         return this.get(updatedTodoType.id);
     }
     /**
+     * TodoTypeオブジェクト削除メソッド queryidをキーにTodoTypeオブジェクトを削除する
+     * @param queryid 削除するTodoTypeID
+     * @returns true: 削除済、false: 削除失敗
+     * @example
+     * ```typescript
+     * const todoTypeList: TodoTypeList = new TodoTypeList();
+     * const todoType: TodoType = new TodoType("Today");
+     * todoTypeList.add(todoType);
+     * todoTypeList.delete(todoType.id);
+     * console.log(todoTypeList.get(todoType.id));  // undefined
+     * ```
+     */
+    public delete(queryid: string | null): boolean {
+        const tempTodoType: TodoType = this.findTodoType(queryid);
+        if (typeof tempTodoType == "undefined") return false;
+        delete this._todosTypes[this._todosTypes.findIndex(({ id }) => id == queryid)];
+        return true;
+    }
+    /**
      * _todosTypesからqueryidをキーにTodoTypeオブジェクトを抽出するプライベートメソッド
      * @param queryid 抽出するTodoTypeID
      * @returns TodoTypeオブジェクト、queryidを見つけられない場合はundefinedを返す
+     * queryidが"inbox"のTodoTypeIDの場合はundefinedを返す
      * @throws TypeError 以外の例外
      * @example
      * ```typescript
@@ -97,6 +117,7 @@ export class TodoTypeList {
      */
     private findTodoType(queryid: string): TodoType {
         try {
+            if (this._todosTypes.findIndex(({ id }) => id == queryid) == 0) throw TypeError();
             return this._todosTypes.find(({ id }) => id == queryid );
         } catch (e) {
             if (e instanceof TypeError) {
