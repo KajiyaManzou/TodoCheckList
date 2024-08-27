@@ -1,4 +1,4 @@
-import { randomUUID } from "crypto";
+import { test, expect } from "@jest/globals";
 import { TodoType } from "../src/modules/TodoType";
 
 test("create TodoType", () => {
@@ -12,10 +12,11 @@ test("create TodoType", () => {
 
 test("update TodoType", () => {
     const todoType = new TodoType("type1");
-    expect(todoType.update(randomUUID(), "type1A")).toBeUndefined();
-    expect(todoType.update(todoType.id, null)).toBeUndefined();
-    expect(todoType.update(todoType.id, "")).toBeUndefined();
-    const todoType2: TodoType = todoType.update(todoType.id, "type1A");
+    expect(todoType.update(null)).toBeUndefined();
+    expect(todoType.update("")).toBeUndefined();
+    expect(todoType.update(" ")).toBeUndefined();
+    expect(todoType.update("      ")).toBeUndefined();
+    const todoType2: TodoType = todoType.update("type1A");
     expect(todoType.type).not.toBe("type1");
     expect(todoType.type).toBe("type1A");
     expect(todoType2.type).toBe("type1A");

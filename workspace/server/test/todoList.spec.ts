@@ -1,4 +1,5 @@
 import { randomUUID } from "crypto";
+import { test, expect } from "@jest/globals";
 import { Todo } from "../src/modules/Todo";
 import { TodoList } from "../src/modules/TodoList";
 
@@ -21,6 +22,8 @@ test("update Todo in Todolist", () => {
     updatedTodo.update("Todo1b");
     expect(todoList.get(todo.id).todo).toBe("Todo1a");
     expect(todoList.update(randomUUID(), "Todo1a")).toBeUndefined();
+    expect(todoList.update(todo.id, null)).toBeUndefined();
+    expect(todoList.update(todo.id, "")).toBeUndefined();
 })
 
 test("delete Todo in TodoList", () => {

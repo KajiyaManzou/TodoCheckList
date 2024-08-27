@@ -154,14 +154,14 @@ Todoオブジェクト完了メソッド
 
 #### Example
 
-```
+```typescript
 const todo1:Todo = new odo("テスト駆動開発を読む");
 todo1.close();
 ```
 
 #### Defined in
 
-Todo.ts:111
+Todo.ts:112
 
 ***
 
@@ -169,7 +169,7 @@ Todo.ts:111
 
 > **import**(`todoObj`): `void`
 
-Todoオブジェクト取り込みメソッド todoObj の情報を自身に取り込む
+Todoオブジェクト取り込みメソッド（todoObj の情報を自身に取り込む）
 
 #### Parameters
 
@@ -183,16 +183,17 @@ Todoオブジェクト取り込みメソッド todoObj の情報を自身に取�
 
 #### Example
 
-```
+```typescript
 const todo1: Todo = new Todo("テスト駆動開発を読む");
 ...
 const todo2: Todo = new Todo("dummy");
 todo2.import(todo1);
+console.log(todo2.todo);  // テスト駆動開発を読む
 ```
 
 #### Defined in
 
-Todo.ts:92
+Todo.ts:93
 
 ***
 
@@ -200,23 +201,23 @@ Todo.ts:92
 
 > **update**(`todo`): [`Todo`](Todo.md)
 
-Todo更新メソッド id をキーに対象の Todo オブジェクトを更新する
+Todo更新メソッド  オブジェクトを更新する
 
 #### Parameters
 
 • **todo**: `string`
 
-更新する Todo情報
+Todo情報（null 有）
 
 #### Returns
 
 [`Todo`](Todo.md)
 
-更新後Todo。todoがnull/emptyの場合はundefinedを返す。
+更新後Todo、todoがnull/emptyの場合はundefinedを返す
 
 #### Example
 
-```
+```typescript
 todo.update("変更したTodo");
 ```
 

@@ -1,4 +1,4 @@
-import { randomUUID } from "crypto";
+import { test, expect } from "@jest/globals";
 import { Todo } from '../src/modules/Todo';
 import { isExportDeclaration } from "typescript";
 
@@ -19,6 +19,8 @@ test("update Todo object", () => {
   const todo = new Todo("Todo1");
   expect(todo.update(null)).toBeUndefined();
   expect(todo.update("")).toBeUndefined();
+  expect(todo.update(" ")).toBeUndefined();
+  expect(todo.update("      ")).toBeUndefined();
   const todo2: Todo = todo.update("Todo1A");
   expect(todo.todo).toBe("Todo1A");
   expect(todo.todo).not.toBe("Todo1");

@@ -25,7 +25,7 @@ export class TodoList {
     /**
      * Todo追加メソッド TodoListにTodoを追加する
      * @param todo 追加するTodoオブジェクト
-     * @returns 追加したTodoオブジェクト。追加に失敗した場合はundefinedを返す。
+     * @returns 追加したTodoオブジェクト、追加に失敗した場合はundefinedを返す
      * @example todoList1 に Todoオブジェクトを追加する
      * ```typescript
      * const todoList1: TodoList = new TodoList("今日のTodo");
@@ -40,7 +40,7 @@ export class TodoList {
     /**
      * Todo取出しメソッド IDをキーにTodoを取り出す
      * @param queryid 取り出すTodoID
-     * @returns 取出したTodoオブジェクト。取出しに失敗した場合はundefinedを返す。
+     * @returns 取出したTodoオブジェクト、取出しに失敗した場合はundefinedを返す
      * @example todoList1からTodoオブジェクトを取り出す
      * ```typescript
      * const todoList1: TodoList = new TodoList("今日のTodo");
@@ -59,8 +59,8 @@ export class TodoList {
     /**
      * Todo更新メソッド IDをキーにTodoを更新する
      * @param queryid 更新するTodoのTodoID
-     * @param todo 更新するTodo情報
-     * @returns 更新したTodoオブジェクト。取出しに失敗した場合はundefinedを返す。
+     * @param todo 更新するTodo情報（null 有）
+     * @returns 更新したTodoオブジェクト、取出しに失敗した場合はundefinedを返す
      * @example todoList内のTodoオブジェクトのtodo情報を更新する
      * ```typescript
      * const todoList1: TodoList = new TodoList("今日のTodo");
@@ -70,10 +70,12 @@ export class TodoList {
      * console.log(todoList1.get(todo1.id).todo);  // エリック・エヴァンスのドメイン駆動設計を読む
      * ```
      */
-    public update(queryid: string, todo: string): Todo {
+    public update(queryid: string, todo: string | null): Todo {
         const tempTodo: Todo = this.findTodo(queryid);
         if (typeof tempTodo == "undefined") return tempTodo;
-        tempTodo.update(todo);
+        const updatedTodo: Todo = tempTodo.update(todo);
+        if (typeof updatedTodo == "undefined") return updatedTodo;
+        updatedTodo.update(todo);
         return this.get(queryid);
     }
     /**
@@ -99,7 +101,7 @@ export class TodoList {
     /**
      * TodoList からqueryidをキーにTodoオブジェクトを抽出する プライベートメソッド
      * @param queryid 抽出するTodoのTodoID
-     * @returns 抽出したTodoおbジュジェクト。TodoIDを見つけられない場合はundefiledを返す
+     * @returns 抽出したTodoオブジェクト、TodoIDを見つけられない場合はundefiledを返す
      * @throws TypeError 以外の例外
      * @example 
      * ```typescript

@@ -63,23 +63,23 @@ export class Todo {
         return this._createDate;
     }
     /**
-     * Todo更新メソッド id をキーに対象の Todo オブジェクトを更新する
-     * @param todo 更新する Todo情報
-     * @returns 更新後Todo。todoがnull/emptyの場合はundefinedを返す。
+     * Todo更新メソッド  オブジェクトを更新する
+     * @param todo Todo情報（null 有）
+     * @returns 更新後Todo、todoがnull/emptyの場合はundefinedを返す
      * @example todoの内容を変更する
      * ```typescript
      * todo.update("変更したTodo");
      * ```
      */
-    public update(todo: string): Todo {
+    public update(todo: string | null): Todo {
         if (todo === null) return undefined;
-        if (todo.length == 0) return undefined;
+        if (todo.trim().length == 0) return undefined;
         this._todo = todo;
         this._updateDate = new Date();
         return this;
     }
     /**
-     * Todoオブジェクト取り込みメソッド todoObj の情報を自身に取り込む
+     * Todoオブジェクト取り込みメソッド（todoObj の情報を自身に取り込む）
      * @param todoObj 取り込む Todo オブジェクト
      * @example 作成済 todo1 オブジェクトをtodo2に取り込む
      * ```typescript
@@ -87,6 +87,7 @@ export class Todo {
      * ...
      * const todo2: Todo = new Todo("dummy");
      * todo2.import(todo1);
+     * console.log(todo2.todo);  // テスト駆動開発を読む
      * ```
      */
     public import(todoObj: Todo): void {
@@ -102,7 +103,7 @@ export class Todo {
     }
     /**
      * Todoオブジェクト完了メソッド
-     * @example Todoを完了済にする。
+     * @example Todoを完了済にする
      * ```typescript
      * const todo1:Todo = new odo("テスト駆動開発を読む");
      * todo1.close();

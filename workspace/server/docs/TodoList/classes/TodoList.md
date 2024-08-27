@@ -42,17 +42,19 @@ Todo追加メソッド TodoListにTodoを追加する
 
 [`Todo`](../../Todo/classes/Todo.md)
 
-追加したTodoオブジェクト。追加に失敗した場合はundefinedを返す。
+追加したTodoオブジェクト、追加に失敗した場合はundefinedを返す
 
 #### Example
 
-```ts
-
+```typescript
+const todoList1: TodoList = new TodoList("今日のTodo");
+const todo1: Todo = new Todo("テスト駆動開発を読む");
+todoList1.add(todo1);
 ```
 
 #### Defined in
 
-TodoList.ts:31
+TodoList.ts:36
 
 ***
 
@@ -76,13 +78,17 @@ true: 削除済、false: 削除失敗
 
 #### Example
 
-```ts
-
+```typescript
+const todoList1: TodoList = new TodoList("今日のTodo");
+const todo1: Todo = new Todo("テスト駆動開発を読む");
+todoList1.add(todo1);
+todoList1.delete(todo1.id);
+console.log(todoList1.get(todo1.id).todo);  // undefined
 ```
 
 #### Defined in
 
-TodoList.ts:67
+TodoList.ts:94
 
 ***
 
@@ -102,17 +108,20 @@ Todo取出しメソッド IDをキーにTodoを取り出す
 
 [`Todo`](../../Todo/classes/Todo.md)
 
-取出したTodoオブジェクト。取出しに失敗した場合はundefinedを返す。
+取出したTodoオブジェクト、取出しに失敗した場合はundefinedを返す
 
 #### Example
 
-```ts
-
+```typescript
+const todoList1: TodoList = new TodoList("今日のTodo");
+const todo1: Todo = new Todo("テスト駆動開発を読む");
+todoList1.add(todo1);
+console.log(todoList1.get(todo1.id).todo);  // テスト駆動開発を読む
 ```
 
 #### Defined in
 
-TodoList.ts:41
+TodoList.ts:52
 
 ***
 
@@ -130,20 +139,24 @@ Todo更新メソッド IDをキーにTodoを更新する
 
 • **todo**: `string`
 
-更新するTodo情報
+更新するTodo情報（null 有）
 
 #### Returns
 
 [`Todo`](../../Todo/classes/Todo.md)
 
-更新したTodoオブジェクト。取出しに失敗した場合はundefinedを返す。
+更新したTodoオブジェクト、取出しに失敗した場合はundefinedを返す
 
 #### Example
 
-```ts
-
+```typescript
+const todoList1: TodoList = new TodoList("今日のTodo");
+const todo1: Todo = new Todo("テスト駆動開発を読む");
+todoList1.add(todo1);
+todoLiat1.update(todo1.id, "エリック・エヴァンスのドメイン駆動設計を読む");
+console.log(todoList1.get(todo1.id).todo);  // エリック・エヴァンスのドメイン駆動設計を読む
 ```
 
 #### Defined in
 
-TodoList.ts:55
+TodoList.ts:73
