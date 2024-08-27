@@ -125,6 +125,33 @@ TodoList.ts:52
 
 ***
 
+### list()
+
+> **list**(): [`Todo`](../../Todo/classes/Todo.md)[]
+
+Todoオブジェクト一覧を返すメソッド
+
+#### Returns
+
+[`Todo`](../../Todo/classes/Todo.md)[]
+
+Todo[]
+
+#### Example
+
+```typescript
+const todoList: TodoList = new TodoList();
+todoList.add(new Todo("Todo1"));
+todoList.add(new Todo("Todo2"));
+console.log(todoList.list());  // Todoオブジェクト "Todo1", "Todo2"
+```
+
+#### Defined in
+
+TodoList.ts:112
+
+***
+
 ### update()
 
 > **update**(`queryid`, `todo`): [`Todo`](../../Todo/classes/Todo.md)

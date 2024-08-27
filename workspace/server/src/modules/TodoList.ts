@@ -99,6 +99,20 @@ export class TodoList {
         return true;
     }
     /**
+     * Todoオブジェクト一覧を返すメソッド
+     * @returns Todo[]
+     * @example
+     * ```typescript
+     * const todoList: TodoList = new TodoList();
+     * todoList.add(new Todo("Todo1"));
+     * todoList.add(new Todo("Todo2"));
+     * console.log(todoList.list());  // Todoオブジェクト "Todo1", "Todo2"
+     * ```
+     */
+    public list(): Todo[] {
+        return this._todos;
+    }
+    /**
      * TodoList からqueryidをキーにTodoオブジェクトを抽出する プライベートメソッド
      * @param queryid 抽出するTodoのTodoID
      * @returns 抽出したTodoオブジェクト、TodoIDを見つけられない場合はundefiledを返す

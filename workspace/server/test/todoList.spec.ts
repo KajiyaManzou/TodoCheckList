@@ -36,3 +36,17 @@ test("delete Todo in TodoList", () => {
     expect(todoList.delete(randomUUID())).toBeFalsy();
     expect(todoList.get(todo1.id)).toBeUndefined();
 })
+
+test("list Todo", () => {
+    const todoList = new TodoList();
+    const todo1 = new Todo("Todo1");
+    const todo2 = new Todo("Todo2");
+    const todo3 = new Todo("Todo3");
+    todoList.add(todo1);
+    todoList.add(todo2);
+    todoList.add(todo3);
+    const todoLists: Todo[] = todoList.list();
+    expect(todoLists.length).toBe(3);
+    expect(todoLists[2].todo).toBe("Todo3");
+
+});
