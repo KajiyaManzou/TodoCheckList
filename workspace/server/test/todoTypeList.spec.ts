@@ -91,3 +91,21 @@ test("Duplicate todoType will cause an error in the add and update methods.", ()
     expect(todoTypeList1.update(todoType2.id, "inbox")).toBeUndefined();
     expect(todoTypeList1.update(todoType6.id, "someday")).toBeUndefined();
 })
+
+test("list TodoType", () => {
+    const todoTypeList1: TodoTypeList = new TodoTypeList();
+    const todoType2: TodoType = new TodoType("someday");
+    const todoType3: TodoType = new TodoType("project");
+    const todoType4: TodoType = new TodoType("waiting for");
+    const todoType5: TodoType = new TodoType("Do it");
+    const todoType6: TodoType = new TodoType("calendar");
+    todoTypeList1.add(todoType2);
+    todoTypeList1.add(todoType3);
+    todoTypeList1.add(todoType4);
+    todoTypeList1.add(todoType5);
+    todoTypeList1.add(todoType6);
+    const todoTypeLists: TodoType[] = todoTypeList1.list();
+    expect(todoTypeLists.length).toBe(6);
+    expect(todoTypeLists[2].type).toBe("project");
+    expect(todoTypeLists[5].type).toBe("calendar");
+})

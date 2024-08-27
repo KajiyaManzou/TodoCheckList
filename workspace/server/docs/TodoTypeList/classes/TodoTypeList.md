@@ -139,6 +139,33 @@ TodoTypeList.ts:40
 
 ***
 
+### list()
+
+> **list**(): [`TodoType`](../../TodoType/classes/TodoType.md)[]
+
+TodoType一覧を返すメソッド
+
+#### Returns
+
+[`TodoType`](../../TodoType/classes/TodoType.md)[]
+
+TodoType[]
+
+#### Example
+
+```typescript
+const todoTypeList: TodoTypeList = new TodoTypeList();
+const todoType: TodoType = new TodoType("Today");
+todoTypeList.add(todoType);
+console.log(todoTypeList.list());  // TodoTypeオブジェクト "inbox", "Today"
+```
+
+#### Defined in
+
+TodoTypeList.ts:121
+
+***
+
 ### update()
 
 > **update**(`queryid`, `todoTypeOfTyoe`): [`TodoType`](../../TodoType/classes/TodoType.md)

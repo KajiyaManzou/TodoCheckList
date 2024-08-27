@@ -108,6 +108,20 @@ export class TodoTypeList {
         return true;
     }
     /**
+     * TodoType一覧を返すメソッド
+     * @returns TodoType[]
+     * @example
+     * ```typescript
+     * const todoTypeList: TodoTypeList = new TodoTypeList();
+     * const todoType: TodoType = new TodoType("Today");
+     * todoTypeList.add(todoType);
+     * console.log(todoTypeList.list());  // TodoTypeオブジェクト "inbox", "Today"
+     * ```
+     */
+    public list(): TodoType[] {
+        return this._todosTypes;
+    }
+    /**
      * _todosTypesからqueryidをキーにTodoTypeオブジェクトを抽出するプライベートメソッド
      * @param queryid 抽出するTodoTypeID
      * @returns TodoTypeオブジェクト、queryidを見つけられない場合はundefinedを返す
