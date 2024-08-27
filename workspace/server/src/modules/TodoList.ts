@@ -6,22 +6,32 @@ import { Todo } from "./Todo";
  */
 export class TodoList {
     private _id: string;
-    private _name: string;
+    private _todoTypeId: string;
     private _todos: Todo[] = [];
 
     /**
      * コンストラクタ
+     * @param todoTypeId TodoTypeId
+     * @example
+     * ```typescript
+     * const todoList: TodoList = new TodoList(todoTypeid);
+     * ```
      */
-    constructor();
-    constructor(name?: string) {
+    constructor(todoTypeId?: string) {
         this._id = randomUUID();
-        if (name != null) {
-            this._name = name;
+        if (todoTypeId != null) {
+            this._todoTypeId = todoTypeId;
         } else {
-            this._name = "none";
+            this._todoTypeId = undefined;
         }
     }
-
+    /**
+     * TodoTypeIdアクセサ
+     * @returns string TodoTypeId
+     */
+    get todoTypeId(): string {
+        return this._todoTypeId;
+    } 
     /**
      * Todo追加メソッド TodoListにTodoを追加する
      * @param todo 追加するTodoオブジェクト

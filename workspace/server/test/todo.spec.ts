@@ -1,6 +1,5 @@
 import { test, expect } from "@jest/globals";
 import { Todo } from '../src/modules/Todo';
-import { isExportDeclaration } from "typescript";
 
 test("create Todo object", () => {
     const todo = new Todo("Todo1");

@@ -12,17 +12,47 @@ TodoListクラス Todo集合をまとめる
 
 ### new TodoList()
 
-> **new TodoList**(): [`TodoList`](TodoList.md)
+> **new TodoList**(`todoTypeId`?): [`TodoList`](TodoList.md)
 
 コンストラクタ
+
+#### Parameters
+
+• **todoTypeId?**: `string`
+
+TodoTypeId
 
 #### Returns
 
 [`TodoList`](TodoList.md)
 
+#### Example
+
+```typescript
+const todoList: TodoList = new TodoList(todoTypeid);
+```
+
 #### Defined in
 
-TodoList.ts:15
+TodoList.ts:20
+
+## Accessors
+
+### todoTypeId
+
+> `get` **todoTypeId**(): `string`
+
+TodoTypeIdアクセサ
+
+#### Returns
+
+`string`
+
+string TodoTypeId
+
+#### Defined in
+
+TodoList.ts:32
 
 ## Methods
 
@@ -54,7 +84,7 @@ todoList1.add(todo1);
 
 #### Defined in
 
-TodoList.ts:36
+TodoList.ts:46
 
 ***
 
@@ -88,7 +118,7 @@ console.log(todoList1.get(todo1.id).todo);  // undefined
 
 #### Defined in
 
-TodoList.ts:94
+TodoList.ts:104
 
 ***
 
@@ -121,7 +151,7 @@ console.log(todoList1.get(todo1.id).todo);  // テスト駆動開発を読む
 
 #### Defined in
 
-TodoList.ts:52
+TodoList.ts:62
 
 ***
 
@@ -148,7 +178,7 @@ console.log(todoList.list());  // Todoオブジェクト "Todo1", "Todo2"
 
 #### Defined in
 
-TodoList.ts:112
+TodoList.ts:122
 
 ***
 
@@ -186,4 +216,4 @@ console.log(todoList1.get(todo1.id).todo);  // エリック・エヴァンスの
 
 #### Defined in
 
-TodoList.ts:73
+TodoList.ts:83
