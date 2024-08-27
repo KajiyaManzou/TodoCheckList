@@ -49,7 +49,7 @@ TodoTypeオブジェクトを追加するメソッド
 
 [`TodoType`](../../TodoType/classes/TodoType.md)
 
-追加したTodoTypeオブジェクト
+追加したTodoTypeオブジェクト、TodoTypeのType情報が既存のTodoTypeと重複した場合はundefinedを返す
 
 #### Example
 
@@ -96,7 +96,7 @@ console.log(todoTypeList.get(todoType.id));  // undefined
 
 #### Defined in
 
-TodoTypeList.ts:101
+TodoTypeList.ts:104
 
 ***
 
@@ -141,7 +141,7 @@ TodoTypeList.ts:40
 
 ### update()
 
-> **update**(`queryid`, `todoType`): [`TodoType`](../../TodoType/classes/TodoType.md)
+> **update**(`queryid`, `todoTypeOfTyoe`): [`TodoType`](../../TodoType/classes/TodoType.md)
 
 TodoTypeオブジェクトを更新するメソッド
 
@@ -151,7 +151,7 @@ TodoTypeオブジェクトを更新するメソッド
 
 更新するTodoTypeのTodoTypeId
 
-• **todoType**: `string`
+• **todoTypeOfTyoe**: `string`
 
 更新するTodoType情報
 
@@ -160,6 +160,7 @@ TodoTypeオブジェクトを更新するメソッド
 [`TodoType`](../../TodoType/classes/TodoType.md)
 
 更新済TodoTypeオブジェクト、queryidが見つからない場合、todoTypeがnull/emptyの場合はundefinedを返す
+todoTypeOfTyoeが既存のTodoTypeと重複した場合はundefinedを返す
 
 #### Example
 
@@ -173,4 +174,4 @@ console.log(todoTypeList.get(todoType.id));  // This Week
 
 #### Defined in
 
-TodoTypeList.ts:81
+TodoTypeList.ts:83

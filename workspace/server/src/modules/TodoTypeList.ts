@@ -43,7 +43,7 @@ export class TodoTypeList {
             result.import(this._todosTypes[0]);
             return result;
         }
-        const tempTodoType: TodoType = this.findTodoType(queryid);
+        const tempTodoType: TodoType = this.findTodoTypeID(queryid);
         if (typeof tempTodoType == "undefined") return tempTodoType;
         result.import(tempTodoType);
         return result;
@@ -51,7 +51,7 @@ export class TodoTypeList {
     /**
      * TodoTypeオブジェクトを追加するメソッド
      * @param todoType 追加するTodoTypeオブジェクト
-     * @returns 追加したTodoTypeオブジェクト
+     * @returns 追加したTodoTypeオブジェクト、TodoTypeのType情報が既存のTodoTypeと重複した場合はundefinedを返す
      * @example
      * ```typescript
      * const todoTypeList: TodoTypeList = new TodoTypeList();
@@ -61,14 +61,16 @@ export class TodoTypeList {
      * ```
      */
     public add(todoType: TodoType): TodoType {
+        if (this.isDuplicate(todoType.type)) return undefined;
         this._todosTypes.push(todoType);
         return this.get(todoType.id);
     }
     /**
      * TodoTypeオブジェクトを更新するメソッド
      * @param queryid 更新するTodoTypeのTodoTypeId
-     * @param todoType 更新するTodoType情報
+     * @param todoTypeOfTyoe 更新するTodoType情報
      * @returns 更新済TodoTypeオブジェクト、queryidが見つからない場合、todoTypeがnull/emptyの場合はundefinedを返す
+     * todoTypeOfTyoeが既存のTodoTypeと重複した場合はundefinedを返す
      * @example
      * ```typescript
      * const todoTypeList: TodoTypeList = new TodoTypeList();
@@ -78,10 +80,11 @@ export class TodoTypeList {
      * console.log(todoTypeList.get(todoType.id));  // This Week
      * ```
      */
-    public update(queryid: string, todoType: string | null): TodoType {
-        const tempTodoType: TodoType = this.findTodoType(queryid);
+    public update(queryid: string, todoTypeOfTyoe: string | null): TodoType {
+        const tempTodoType: TodoType = this.findTodoTypeID(queryid);
         if (typeof tempTodoType == "undefined") return tempTodoType;
-        const updatedTodoType: TodoType = tempTodoType.update(todoType);
+        if (this.isDuplicate(todoTypeOfTyoe)) return undefined;
+        const updatedTodoType: TodoType = tempTodoType.update(todoTypeOfTyoe);
         if (typeof updatedTodoType == "undefined") return updatedTodoType;
         return this.get(updatedTodoType.id);
     }
@@ -99,7 +102,7 @@ export class TodoTypeList {
      * ```
      */
     public delete(queryid: string | null): boolean {
-        const tempTodoType: TodoType = this.findTodoType(queryid);
+        const tempTodoType: TodoType = this.findTodoTypeID(queryid);
         if (typeof tempTodoType == "undefined") return false;
         delete this._todosTypes[this._todosTypes.findIndex(({ id }) => id == queryid)];
         return true;
@@ -112,10 +115,10 @@ export class TodoTypeList {
      * @throws TypeError 以外の例外
      * @example
      * ```typescript
-     * const todoType: TodoType = this.findTodoType(id);
+     * const todoType: TodoType = this.findTodoTypeID(id);
      * ```
      */
-    private findTodoType(queryid: string): TodoType {
+    private findTodoTypeID(queryid: string): TodoType {
         try {
             if (this._todosTypes.findIndex(({ id }) => id == queryid) == 0) throw TypeError();
             return this._todosTypes.find(({ id }) => id == queryid );
@@ -125,5 +128,19 @@ export class TodoTypeList {
             }
             throw e;
         }
+    }
+    /**
+     * _todosTypesからtodoTypeをキーに重複するTodoTypeオブジェクトの有無を判定するプライベートメソッド
+     * @param todoType 重複を確認するTodoType情報
+     * @returns true: 重複有、false: 重複無
+     * @example
+     * ```typescript
+     * console.log(this.isDuplicate("inbox"));  // true
+     * console.log(this.isDuplicate("XXXXXX"));  // false
+     * ```
+     */
+    private isDuplicate(todoType: string): boolean {
+        if (this._todosTypes.find(( { type }) => type == todoType)) return true;
+        return false;
     }
 }
