@@ -1,37 +1,23 @@
 import { randomUUID } from "crypto";
-import { Todo } from "./Todo";
+import { Todo } from "@/dto/Todo";
 
 /**
  * TodoListクラス Todo集合をまとめる
  */
 export class TodoList {
     private _id: string;
-    private _todoTypeId: string;
     private _todos: Todo[] = [];
 
     /**
      * コンストラクタ
-     * @param todoTypeId TodoTypeId
      * @example
      * ```typescript
-     * const todoList: TodoList = new TodoList(todoTypeid);
+     * const todoList: TodoList = new TodoList();
      * ```
      */
-    constructor(todoTypeId?: string) {
+    constructor() {
         this._id = randomUUID();
-        if (todoTypeId != null) {
-            this._todoTypeId = todoTypeId;
-        } else {
-            this._todoTypeId = undefined;
-        }
     }
-    /**
-     * TodoTypeIdアクセサ
-     * @returns string TodoTypeId
-     */
-    get todoTypeId(): string {
-        return this._todoTypeId;
-    } 
     /**
      * Todo追加メソッド TodoListにTodoを追加する
      * @param todo 追加するTodoオブジェクト

@@ -1,7 +1,7 @@
 import { randomUUID } from "crypto";
 import { test, expect } from "@jest/globals";
-import { Todo } from "../src/modules/Todo";
-import { TodoList } from "../src/modules/TodoList";
+import { Todo } from "../src/dto/Todo";
+import { TodoList } from "../src/modules/array/TodoList";
 
 test("create TodoList object", () => {
     const todoList = new TodoList();

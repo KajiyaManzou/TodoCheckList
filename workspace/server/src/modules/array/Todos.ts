@@ -4,11 +4,12 @@ import { TodoTypeList } from "./TodoTypeList";
 import { TodoType } from "./TodoType";
 
 export class Todos {
-    private _todoLists: TodoList[] = [];
+    private _todoList: TodoList;
     private _todoTypeList: TodoTypeList;
+    
     constructor() {
+        this._todoList = new TodoList();
         this._todoTypeList = new TodoTypeList();
-        this._todoLists.push(new TodoList(this._todoTypeList.get().id));
     }
 
     public todoTypeList(): TodoType[] {
@@ -18,14 +19,13 @@ export class Todos {
     public addTodoType(todoType: TodoType): TodoType {
         const result: TodoType = this._todoTypeList.add(todoType);
         if (typeof result == "undefined") return result;
-        this._todoLists.push(new TodoList(result.id));
         return result;
     }
 
     public todoList(todoType: string): Todo[] {
         const todoTypeLists: TodoType[] = this._todoTypeList.list();
         const tempTodoType: TodoType = todoTypeLists.find(({ type }) => type == todoType );
-        const todoList: TodoList = this._todoLists.find(({ todoTypeId }) => todoTypeId == tempTodoType.id);
+        const todoList: TodoList = this._todoList.find(({ todoTypeId }) => todoTypeId == tempTodoType.id);
         return todoList.list();
     }
 
@@ -33,7 +33,7 @@ export class Todos {
         if (todoType == null) todoType = "inbox";
         const todoTypeLists: TodoType[] = this._todoTypeList.list();
         const tempTodoType: TodoType = todoTypeLists.find(({ type }) => type == todoType );
-        const todoList: TodoList = this._todoLists.find(({ todoTypeId }) => todoTypeId == tempTodoType.id);
+        const todoList: TodoList = this._todoList.find(({ todoTypeId }) => todoTypeId == tempTodoType.id);
         return todoList.add(todo);
     }
 }

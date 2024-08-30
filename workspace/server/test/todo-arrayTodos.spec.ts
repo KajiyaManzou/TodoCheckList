@@ -1,10 +1,10 @@
 import { randomUUID } from "crypto";
 import { test, expect } from "@jest/globals";
-import { Todo } from "../src/modules/Todo";
+import { Todo } from "../src/dto/Todo";
 //import { TodoList } from "../src/modules/TodoList";
-import { TodoType } from "../src/modules/TodoType";
-//import { TodoTypeList } from "../src/modules/TodoTypeList";
-import { Todos } from "../src/modules/Todos";
+import { Type } from "../src/dto/Type";
+//import { TypeList } from "../src/modules/array/TypeList";
+import { Todos } from "../src/modules/array/Todos";
 
 test("create Todos", () => {
     const todos: Todos = new Todos();
