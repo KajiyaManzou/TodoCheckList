@@ -1,7 +1,7 @@
 export class Todo {
     private _id: string;
     private _todo: string;
-    private _type: string;
+    private _box: string;
     private _tags: string[] = [];
     private _childTodos: Todo[] = [];
     private _expirationDate: Date;
@@ -12,20 +12,24 @@ export class Todo {
      * Todo コンストラクタ
      * @param id TodoID
      * @param todo Todo情報
-     * @param type Todo区分
-     * @param tag タグ
+     * @param box Todo区分
+     * @param tags タグ情報
      * @param expirationDate Todo期限
      * @example
      * ```typescript
      * const newTodo: Todo = new Todo(id, todo, type, tag, expirationDate);
      * ```
      */
-    constructor(id: string, todo: string, type: string, tag: string, expirationDate: Date) {
+    constructor(id: string, todo: string, box: string, tags: string[], expirationDate: Date) {
         this._id = id;
         this._todo = todo;
-        this._type = type;
-        this._tags.push(tag);
-        this._expirationDate = expirationDate;
+        this._box = box;
+        this._tags = tags;
+        if (expirationDate instanceof Date) {
+            this._expirationDate = expirationDate;
+        } else {
+            this._expirationDate = undefined;
+        }
         this._createDate = new Date();
         this._updateDate = null;
         this._isClose = false;
@@ -60,14 +64,14 @@ export class Todo {
      * Type情報 getアクセサ
      * @returns string Type情報
      */
-    get type(): string {
-        return this._type;
+    get box(): string {
+        return this._box;
     }
     /**
      * Type情報 setアクセサ
      */
-    set type(type: string) {
-        this._type = type;
+    set box(box: string) {
+        this._box = box;
     }
     /**
      * Tag情報 getアクセサ
@@ -79,8 +83,8 @@ export class Todo {
     /**
      * Tag情報 setアクセサ
      */
-    set tags(tag: string) {
-        this._tags.push(tag);
+    set tags(tags: string[]) {
+        this._tags = tags;
     }
     /**
      * 子Todo getアクセサ
@@ -92,8 +96,8 @@ export class Todo {
     /**
      * 子Todo setアクセサ
      */
-    set childTodos(todo: Todo) {
-        this._childTodos.push(todo);
+    set childTodos(todos: Todo[]) {
+        this._childTodos = todos;
     }
     /**
      * 完了/未完フラグ getサクセサ
@@ -119,7 +123,11 @@ export class Todo {
      * 作成日付 setアクセサ
      */
     set createDate(createDate: Date) {
-        this._createDate = createDate;
+        if (createDate instanceof Date) {
+            this._createDate = createDate;
+        } else {
+            this._createDate = undefined;
+        }
     }
     /**
      * 期限日 getアクセサ
@@ -132,7 +140,11 @@ export class Todo {
      * 期限日 setアクセサ
      */
     set expirationDate(expirationDate: Date) {
-        this._expirationDate = expirationDate;
+        if (expirationDate instanceof Date) {
+            this._expirationDate = expirationDate;
+        } else {
+            this._expirationDate = undefined;
+        }
     }
     /**
      * 更新日 getアクセサ
@@ -145,6 +157,10 @@ export class Todo {
      * 更新日 setアクセサ
      */
     set updateDate(updateDate: Date) {
-        this._updateDate = updateDate;
+        if (updateDate instanceof Date) {
+            this._updateDate = updateDate;
+        } else {
+            this._updateDate = undefined;
+        }
     }
 }
