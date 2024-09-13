@@ -132,26 +132,32 @@ test("update Todo in Todolist", () => {
 
 test("delete Todo in TodoList", () => {
     const todoList = new TodoList();
-    const todo1 = new Todo("Todo1");
-    todoList.add(todo1);
-    const todo2 = new Todo("Todo2");
-    todoList.add(todo2);
-    expect(todoList.delete(todo1.id)).toBeTruthy();
-    expect(todoList.delete(randomUUID())).toBeFalsy();
-    expect(todoList.get(todo1.id)).toBeUndefined();
-})
-/*
+    const expirationDate = new Date();
+    expirationDate.setDate(expirationDate.getDate() + 7);
+    const todo1: Todo = todoList.createTodo("テスト駆動開発を読む", "inbox", "読書", expirationDate);
+
+    const todo2: Todo = todoList.createTodo("映画「ラストマイル」を観る", "Someday", "映画", null);
+
+    const todo3: Todo = todoList.createTodo("ラーメンを食べる", "inbox", "食事", undefined);
+
+    expect(todoList.deleteTodo(todo1.id)).toBeTruthy();
+    expect(todoList.deleteTodo(randomUUID())).toBeFalsy();
+    expect(todoList.deleteTodo(todo1.id)).toBeFalsy();
+    expect(todoList.getTodo(todo1.id)).toBeUndefined();
+});
+
 test("list Todo", () => {
     const todoList = new TodoList();
-    const todo1 = new Todo("Todo1");
-    const todo2 = new Todo("Todo2");
-    const todo3 = new Todo("Todo3");
-    todoList.add(todo1);
-    todoList.add(todo2);
-    todoList.add(todo3);
-    const todoLists: Todo[] = todoList.list();
+    const expirationDate = new Date();
+    expirationDate.setDate(expirationDate.getDate() + 7);
+    const todo1: Todo = todoList.createTodo("テスト駆動開発を読む", "inbox", "読書", expirationDate);
+
+    const todo2: Todo = todoList.createTodo("映画「ラストマイル」を観る", "Someday", "映画", null);
+
+    const todo3: Todo = todoList.createTodo("ラーメンを食べる", "inbox", "食事", undefined);
+
+    const todoLists: Todo[] = todoList.getTodos();
     expect(todoLists.length).toBe(3);
-    expect(todoLists[2].todo).toBe("Todo3");
+    expect(todoLists[2].todo).toBe("ラーメンを食べる");
 
 });
-*/

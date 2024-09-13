@@ -92,7 +92,7 @@ export class TodoList {
      * console.log(todoList1.get(todo1.id).todo);  // undefined
      * ```
      */
-    public delete(queryid: string): boolean {
+    public deleteTodo(queryid: string): boolean {
         const tempTodo: Todo = this.findTodo(queryid);
         if (typeof tempTodo == "undefined") return false;
         const index = this._todos.findIndex(({ id }) => id == queryid);
@@ -110,7 +110,7 @@ export class TodoList {
      * console.log(todoList.list());  // Todoオブジェクト "Todo1", "Todo2"
      * ```
      */
-    public list(): Todo[] {
+    public getTodos(): Todo[] {
         return this._todos;
     }
     /**

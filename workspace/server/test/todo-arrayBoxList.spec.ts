@@ -3,12 +3,12 @@ import { test, expect } from "@jest/globals";
 import { Box } from "../src/dto/Box";
 import { BoxList } from "../src/modules/array/BoxList";
 
-test("create TypeList object", () => {
+test("create BoxList object", () => {
     const boxList1: BoxList = new BoxList();
     expect(boxList1.getBox().name).toBe("inbox");
 });
 
-test("add Type into TypeList", () => {
+test("add Box into BoxList", () => {
     const boxList1: BoxList = new BoxList();
     expect(boxList1.getBox().name).toBe("inbox");
     const box1: Box = boxList1.createBox("Today");
@@ -29,7 +29,7 @@ test("add Type into TypeList", () => {
     expect(boxList1.getBox(randomUUID())).toBeUndefined();
 });
 
-test("update Type into TypeList", () => {
+test("update Box into BoxList", () => {
     const boxList1: BoxList = new BoxList();
     const box2: Box = boxList1.createBox("someday");
     const box3: Box = boxList1.createBox("project");
@@ -40,14 +40,13 @@ test("update Type into TypeList", () => {
     expect(boxList1.getBox(box3.id).name).toBe("Project B");
     expect(boxList1.getBox(box3.id).name).not.toBe("project");
     expect(boxList1.updateBox(randomUUID(), "Project B")).toBeUndefined();
-    //expect(boxList1.updateBox(box5.id, null)).toBeUndefined();
     expect(boxList1.updateBox(box4.id, "")).toBeUndefined();
     expect(boxList1.updateBox(box2.id, "   ")).toBeUndefined();
     const boxInbox = boxList1.getBox();
     expect(boxList1.updateBox(boxInbox.id, "new Inbox")).toBeUndefined();
 });
 
-test("delete Type into TypeList", () => {
+test("delete Box into BoxList", () => {
     const boxList1: BoxList = new BoxList();
     const box2: Box = boxList1.createBox("someday");
     const box3: Box = boxList1.createBox("project");
@@ -77,7 +76,7 @@ test("Duplicate box will cause an error in the add and update methods.", () => {
     expect(boxList1.updateBox(box6.id, box4.name)).toBeUndefined();
 });
 
-test("list Type", () => {
+test("list Box", () => {
     const boxList1: BoxList = new BoxList();
     const box2: Box = boxList1.createBox("someday");
     const box3: Box = boxList1.createBox("project");
