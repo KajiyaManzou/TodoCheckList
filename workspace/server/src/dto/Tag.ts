@@ -21,25 +21,23 @@ export class Tag {
     get id() {
         return this._id;
     }
-    set id(id: string) {
-        this._id = id;
-    }
     get tag() {
         return this._tag;
-    }
-    set tag(tag: string) {
-        this._tag = tag;
     }
     get createDate() {
         return this._createDate;
     }
-    set createDate(createDate: Date) {
-        this._createDate = createDate;
-    }
     get updateDate() {
         return this._updateDate;
     }
-    set updateDate(updateDate: Date) {
-        this._updateDate = updateDate;
+    public update(tag: string) {
+        this._tag = tag;
+        this._updateDate = new Date();
+    }
+    public import(into: Tag) {
+        this._id = into._id;
+        this._tag = into._tag;
+        this._createDate = into._createDate;
+        this._updateDate = into._updateDate;
     }
 }

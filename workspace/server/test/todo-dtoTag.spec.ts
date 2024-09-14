@@ -22,12 +22,12 @@ test("create Tag and update", () => {
     createDate2.setDate(createDate2.getDate() - 1);
     const updateDate2 = new Date();
     updateDate2.setDate(updateDate2.getDate() + 1);
-    newTag1.id = id2;
+    //newTag1.id = id2;
     newTag1.tag = tag2;
-    newTag1.createDate = createDate2;
-    newTag1.updateDate = updateDate2;
-    expect(newTag1.id).toBe(id2);
+    //newTag1.createDate = createDate2;
+    //newTag1.updateDate = updateDate2;
+    expect(newTag1.id).not.toBe(id2);
     expect(newTag1.tag).toBe(tag2);
-    expect(newTag1.createDate.getDate()).toBe(createDate2.getDate());
-    expect(newTag1.updateDate.getDate()).toBe(updateDate2.getDate());
+    expect(newTag1.createDate.getDate()).not.toBe(createDate2.getDate());
+    expect(newTag1.updateDate).toBeNull();
 });

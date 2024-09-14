@@ -1,28 +1,32 @@
 import { randomUUID } from "crypto";
 import { test, expect } from "@jest/globals";
 import { Todo } from "../src/dto/Todo";
-//import { TodoList } from "../src/modules/TodoList";
-import { Type } from "../src/dto/Type";
-//import { TypeList } from "../src/modules/array/TypeList";
+import { Box } from "../src/dto/Box";
+import { Tag } from "../src/dto/Tag";
 import { Todos } from "../src/modules/array/Todos";
 
 test("create Todos", () => {
     const todos: Todos = new Todos();
-    expect(todos.todoTypeList().length).toBe(1);
-    expect(todos.todoTypeList()[0].type).toBe("inbox");
-})
+    const todoList: Todo[] = todos.getTodos();
+    expect(todoList.length).toBe(0);
+    const boxList: Box[] = todos.getBoxes();
+    expect(boxList.length).toBe(1);
+    const tagList: Tag[] = todos.getTags();
+    expect(tagList.length).toBe(0);
+});
 
-test("add Todos.addTodoType(), addTodo()", () => {
+test("add todo", () => {
     const todos: Todos = new Todos();
-    todos.addTodoType(new TodoType("Today"));
-    expect(todos.todoTypeList().length).toBe(2);
-    expect(todos.todoTypeList()[0].type).toBe("inbox");
-    expect(todos.todoTypeList()[1].type).toBe("Today");
-    todos.addTodo(new Todo("クリエイティブプログラマーを読む"));
-    expect(todos.todoList("inbox").length).toBe(1);
-    todos.addTodo(new Todo("今日のジャーナルを記録する"));
-    expect(todos.todoList("inbox").length).toBe(2);
-    todos.addTodo(new Todo("夏休みの宿題をする"), todos.todoTypeList()[1].type);
-    todos.addTodo(new Todo("夏休み自由研究をする"), todos.todoTypeList()[1].type);
-    expect(todos.todoList("Today").length).toBe(2);
-})
+    const expirationDate = new Date();
+    expirationDate.setDate(expirationDate.getDate() + 7);
+    const todo1: Todo = todos.addTodo("テスト駆動開発を読む");
+    expect(todo1).not.toBeUndefined();
+    const todo2: Todo = todos.addTodo("リファクタリング第２版を読む", "inbox");
+    expect(todo2).not.toBeUndefined();
+    const todo3: Todo = todos.addTodo("コスモスを読む", "inbox", "読書");
+    expect(todo3).not.toBeUndefined();
+    const todo4: Todo = todos.addTodo("女が死ぬ", "inbox", "読書", expirationDate);
+    expect(todo4).not.toBeUndefined();
+    const todoList: Todo[] = todos.getTodos();
+    expect(todoList.length).toBe(4);
+});

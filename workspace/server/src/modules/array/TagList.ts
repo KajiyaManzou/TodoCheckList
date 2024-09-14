@@ -25,7 +25,7 @@ export class TagList {
         const result: Tag = this.findTagID(queryid);
         if (typeof result == "undefined") return undefined;
         if (this.isDuplicate(tag)) return undefined;
-        result.tag = tag;
+        result.update(tag);
         return this.getTag(result.id);
     }
     public deleteTag(queryid: string): boolean {
@@ -54,10 +54,7 @@ export class TagList {
     }
     private copyTag(from: Tag): Tag {
         const result: Tag = new Tag("id", "temp");
-        result.id = from.id;
-        result.tag = from.tag;
-        result.createDate = from.createDate;
-        result.updateDate = from.updateDate;
+        result.import(from);
         return result;
     }
 }
