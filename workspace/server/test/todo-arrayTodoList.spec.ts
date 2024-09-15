@@ -75,11 +75,15 @@ test("update Todo in Todolist", () => {
     expect(todoList.getTodo(todo1.id).tags).toBe(todo1.tags);
     expect(todoList.getTodo(todo1.id).expirationDate).toBe(todo1.expirationDate);
 
+    /*
     todo1.todo = "映画「ラストマイル」を観る";
     todo1.box = "Someday";
     todo1.tags.pop();
     todo1.tags.push("映画");
     todo1.expirationDate.setDate(todo1.expirationDate.getDate() + 30);
+    */
+    expirationDate.setDate(todo1.expirationDate.getDate() + 30);
+    todo1.update("映画「ラストマイル」を観る", "Someday", ["映画"], expirationDate);
     const todo1B: Todo = todoList.updateTodo(todo1.id, todo1.todo, todo1.box, todo1.tags, todo1.expirationDate);
 
     expect(todo1B.todo).toBe(todo1.todo);

@@ -42,23 +42,11 @@ export class Todo {
         return this._id;
     }
     /**
-     * TodoID setアクセサ
-     */
-    set id(id: string) {
-        this._id = id;
-    }
-    /**
      * Todo情報 getアクセサ
      * @returns string Todo情報
      */
     get todo(): string {
         return this._todo;
-    }
-    /**
-     * Todo情報 setアクセサ
-     */
-    set todo(todo: string) {
-        this._todo = todo;
     }
     /**
      * Type情報 getアクセサ
@@ -68,23 +56,11 @@ export class Todo {
         return this._box;
     }
     /**
-     * Type情報 setアクセサ
-     */
-    set box(box: string) {
-        this._box = box;
-    }
-    /**
      * Tag情報 getアクセサ
      * @returns string[] Tag情報
      */
     get tags(): string[] {
         return this._tags;
-    }
-    /**
-     * Tag情報 setアクセサ
-     */
-    set tags(tags: string[]) {
-        this._tags = tags;
     }
     /**
      * 子Todo getアクセサ
@@ -94,23 +70,11 @@ export class Todo {
         return this._childTodos;
     }
     /**
-     * 子Todo setアクセサ
-     */
-    set childTodos(todos: Todo[]) {
-        this._childTodos = todos;
-    }
-    /**
      * 完了/未完フラグ getサクセサ
      * @returns boolean true: 完了、false: 未完
      */
     get isClose(): boolean {
         return this._isClose;
-    }
-    /**
-     * 完了/未完フラグ setサクセサ
-     */
-    set isClose(bool: boolean) {
-        this._isClose = bool;
     }
     /**
      * 作成日付 getアクセサ
@@ -120,31 +84,11 @@ export class Todo {
         return this._createDate;
     }
     /**
-     * 作成日付 setアクセサ
-     */
-    set createDate(createDate: Date) {
-        if (createDate instanceof Date) {
-            this._createDate = createDate;
-        } else {
-            this._createDate = undefined;
-        }
-    }
-    /**
      * 期限日 getアクセサ
      * @returns Date 期限日
      */
     get expirationDate(): Date {
         return this._expirationDate;
-    }
-    /**
-     * 期限日 setアクセサ
-     */
-    set expirationDate(expirationDate: Date) {
-        if (expirationDate instanceof Date) {
-            this._expirationDate = expirationDate;
-        } else {
-            this._expirationDate = undefined;
-        }
     }
     /**
      * 更新日 getアクセサ
@@ -153,14 +97,38 @@ export class Todo {
     get updateDate(): Date {
         return this._updateDate;
     }
-    /**
-     * 更新日 setアクセサ
-     */
-    set updateDate(updateDate: Date) {
-        if (updateDate instanceof Date) {
-            this._updateDate = updateDate;
+    public update(todo: string, box: string, tags: string[], expirationDate: Date): void {
+        this._todo = todo;
+        this._box = box;
+        this._tags = tags;
+        if (expirationDate instanceof Date) {
+            this._expirationDate = expirationDate;
         } else {
-            this._updateDate = undefined;
+            this._expirationDate = undefined;
         }
+        this._updateDate = new Date();
+    }
+    public close(): void {
+        this._isClose = true;
+        this._updateDate = new Date();
+    }
+    public unclosed(): void {
+        this._isClose = false;
+        this._updateDate = new Date();
+    }
+    public updateChildTodos(childTodos: Todo[]): void {
+        this._childTodos = childTodos;
+        this._updateDate = new Date();
+    }
+    public import(into: Todo): void {
+        this._id = into.id;
+        this._todo = into.todo;
+        this._box = into.box;
+        this._tags = into.tags;
+        this._childTodos = into.childTodos;
+        this._expirationDate = into.expirationDate;
+        this._createDate = into.createDate;
+        this._updateDate = into.updateDate;
+        this._isClose = into.isClose;
     }
 }

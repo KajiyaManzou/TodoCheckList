@@ -68,15 +68,7 @@ export class TodoList {
         if (queryid == null || typeof queryid == "undefined" || queryid.trim().length == 0) return undefined;
         const targetTodo: Todo = this.findTodo(queryid);
         if (typeof targetTodo == "undefined") return undefined;
-        targetTodo.todo = todo;
-        targetTodo.box = box;
-        targetTodo.tags = tags;
-        if (expirationDate == null || typeof expirationDate == "undefined") {
-            targetTodo.expirationDate = undefined;
-        } else {
-            targetTodo.expirationDate = expirationDate;
-        }
-        targetTodo.updateDate = new Date();
+        targetTodo.update(todo, box, tags, expirationDate);
         return this.copyTodo(targetTodo);
     }
     /**
@@ -95,8 +87,7 @@ export class TodoList {
     public deleteTodo(queryid: string): boolean {
         const tempTodo: Todo = this.findTodo(queryid);
         if (typeof tempTodo == "undefined") return false;
-        const index = this._todos.findIndex(({ id }) => id == queryid);
-        delete this._todos[index];
+        this._todos.splice(this._todos.findIndex(({ id }) => id == queryid), 1);
         return true;
     }
     /**
@@ -134,11 +125,8 @@ export class TodoList {
         }
     }
     private copyTodo(from: Todo): Todo {
-        const result: Todo = new Todo(from.id, from.todo, from.box, from.tags, from.expirationDate);
-        result.childTodos = from.childTodos;
-        result.createDate = from.createDate;
-        result.updateDate = from.updateDate;
-        result.isClose = from.isClose;
+        const result: Todo = new Todo("temp", "todo", "box", ["tag"], new Date());
+        result.import(from);
         return result;
     }
 }

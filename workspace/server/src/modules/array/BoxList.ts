@@ -100,7 +100,7 @@ export class BoxList {
     public deleteBox(queryid: string): boolean {
         const tempBox: Box = this.findBoxID(queryid);
         if (typeof tempBox == "undefined") return false;
-        delete this._todosBoxes[this._todosBoxes.findIndex(({ id }) => id == queryid)];
+        this._todosBoxes.splice(this._todosBoxes.findIndex(({ id }) => id == queryid), 1)
         return true;
     }
     /**

@@ -31,7 +31,7 @@ export class TagList {
     public deleteTag(queryid: string): boolean {
         const tempTag: Tag = this.findTagID(queryid);
         if (typeof tempTag == "undefined") return false;
-        delete this._todosTags[this._todosTags.findIndex(({ id }) => id == queryid)];
+        this._todosTags.splice(this._todosTags.findIndex(({ id }) => id == queryid), 1)
         return true;
     }
     public getTags(): Tag[] {
