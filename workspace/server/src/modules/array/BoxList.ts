@@ -47,7 +47,7 @@ export class BoxList {
     }
     /**
      * Boxオブジェクトを追加するメソッド
-     * @param boxName 追加するBox情報
+     * @param box 追加するBox情報
      * @returns 追加したBoxオブジェクト、BoxのBox情報が既存のBoxと重複した場合はundefinedを返す
      * @example
      * ```typescript
@@ -57,16 +57,16 @@ export class BoxList {
      * console.log(BoxList.getBox(newBox.id).name);  // Today
      * ```
      */
-    public createBox(boxName: string): Box {
-        if (this.isDuplicate(boxName)) return undefined;
+    public createBox(box: string): Box {
+        if (this.isDuplicate(box)) return undefined;
         const newId = randomUUID();
-        this._todosBoxes.push(new Box(newId, boxName));
+        this._todosBoxes.push(new Box(newId, box));
         return this.getBox(newId);
     }
     /**
      * Boxオブジェクトを更新するメソッド
      * @param queryid 更新するBoxのBoxId
-     * @param boxName 更新するBox情報
+     * @param box 更新するBox情報
      * @returns 更新済Boxオブジェクト、queryidが見つからない場合、Boxがemptyの場合はundefinedを返す
      * nameが既存のBoxと重複した場合はundefinedを返す
      * @example
@@ -77,12 +77,12 @@ export class BoxList {
      * console.log(BoxList.getBox(Box.id).name);  // This Week
      * ```
      */
-    public updateBox(queryid: string, boxName: string): Box {
-        if (boxName.trim().length == 0) return undefined;
+    public updateBox(queryid: string, box: string): Box {
+        if (box.trim().length == 0) return undefined;
         const result: Box = this.findBoxID(queryid);
         if (typeof result == "undefined") return undefined;
-        if (this.isDuplicate(boxName)) return undefined;
-        result.name = boxName;
+        if (this.isDuplicate(box)) return undefined;
+        result.update(box);
         return this.getBox(result.id);
     }
     /**
@@ -149,12 +149,12 @@ export class BoxList {
      * ```
      */
     private isDuplicate(boxName: string): boolean {
-        if (this._todosBoxes.find(({ name }) => name == boxName)) return true;
+        if (this._todosBoxes.find(({ box }) => box == boxName)) return true;
         return false;
     }
     /**
      * Boxオブジェクトコピー プライベートメソッド
-     * @param from コピー元Boxオブジェクト
+     * @param into コピー元Boxオブジェクト
      * @returns Box コピー後、新しいBoxオブジェクト
      * @example
      * ```typescript
@@ -164,12 +164,9 @@ export class BoxList {
      * console.log(box2.name);  // Today
      * ```
      */
-    private copyBox(from: Box): Box {
+    private copyBox(into: Box): Box {
         const result: Box = new Box("id", "temp");
-        result.id = from.id;
-        result.name = from.name;
-        result.createDate = from.createDate;
-        result.updateDate = from.updateDate;
+        result.import(into);
         return result;
     }
 }

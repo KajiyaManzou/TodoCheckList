@@ -1,45 +1,43 @@
 export class Box {
     private _id: string;
-    private _name: string;
+    private _box: string;
     private _createDate: Date;
     private _updateDate: Date;
     /**
      * Box コンストラクタ
      * @param id TypdID
-     * @param name 名称
+     * @param box 名称
      * @example
      * ```typescript
      * const newBox: Box = new Box(id, なめ);
      * ```
      */
-    constructor(id: string, name: string) {
+    constructor(id: string, box: string) {
         this._id = id;
-        this._name = name;
+        this._box = box;
         this._createDate = new Date();
         this._updateDate = null;
     };
     get id() {
         return this._id;
     }
-    set id(id: string) {
-        this._id = id;
-    }
-    get name() {
-        return this._name;
-    }
-    set name(name: string) {
-        this._name = name;
+    get box() {
+        return this._box;
     }
     get createDate() {
         return this._createDate;
     }
-    set createDate(createDate: Date) {
-        this._createDate = createDate;
-    }
     get updateDate() {
         return this._updateDate;
     }
-    set updateDate(updateDate: Date) {
-        this._updateDate = updateDate;
+    public update(box: string): void {
+        this._box = box;
+        this._updateDate = new Date();
+    }
+    public import(into: Box): void {
+        this._id = into._id;
+        this._box = into._box;
+        this._createDate = into._createDate;
+        this._updateDate = into._updateDate;
     }
 }

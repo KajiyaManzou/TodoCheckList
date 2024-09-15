@@ -30,11 +30,11 @@ export class Tag {
     get updateDate() {
         return this._updateDate;
     }
-    public update(tag: string) {
+    public update(tag: string): void {
         this._tag = tag;
         this._updateDate = new Date();
     }
-    public import(into: Tag) {
+    public import(into: Tag): void {
         this._id = into._id;
         this._tag = into._tag;
         this._createDate = into._createDate;
